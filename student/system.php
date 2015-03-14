@@ -97,7 +97,7 @@ include("student_test.php");
         $row_four = $query_four->fetchAll();
         $row_four = $row_four[0];
 
-        echo $row_three['major'].$row_four['major']."<br>";
+        //echo $row_three['major'].$row_four['major']."<br>";
         if ($row_three['major'] == $row_four['major']) {
             ?>
             <td width="3%" height="15">
@@ -252,15 +252,11 @@ if ($count != 0)
 
     <?php
     //}//if
-    var_dump($_COOKIE);
-echo $teacher_ID;
     $sql = "select * from $Subject where student_ID='$student_ID'";
     $query = $DB->query($sql);
     $row_one = $query->fetchAll();
     $row_one = $row_one[0];
-var_dump($row_one);
     $teacher_ID = $row_one['teacher_ID'];
-    echo $teacher_ID;
     $sql = "select teacher_name from $Teacher where teacher_ID='$teacher_ID'";
     $query = $DB->query($sql);
     $row_two = $query->fetchAll();

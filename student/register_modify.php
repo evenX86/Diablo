@@ -79,6 +79,8 @@ include("connect.php");
 <br>
 
 <?php
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
+header("Content-type: text/html; charset=utf-8");
 $question = $_POST['question'];
 $answer = $_POST['answer'];
 $email = $_POST['email'];

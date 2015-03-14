@@ -9,8 +9,8 @@ $subject_ID = $_GET['subject_ID'];
 $student_ID = $_GET['student_ID'];
 
 $sql = "select * from $Subject where student_ID='$student_ID'";
-$query = mysql_query($sql);
-$count = mysql_num_rows($query);
+$query = $DB->query($sql);
+$count = count($query->fetchAll()[0]);
 if($count != 0)
 {
   echo "<script>alert ('您的论文课题已选，请勿再选！');history.back();</script>";
@@ -20,10 +20,10 @@ else
 {
 //$sql = "insert into $Subject (student_ID) values ('$student_ID') where subject_ID='$subject_ID'";
 $sql = "UPDATE $Subject SET student_ID='$student_ID' where subject_ID='$subject_ID'";
-$query_one = mysql_query($sql) or die ('连接错误！!!!!!!!!!');
+$query_one = $DB->query($sql) or die ('连接错误！!!!!!!!!!');
 
 $sql = "UPDATE $Subject SET status='已选' where subject_ID='$subject_ID'";
-$query_two = mysql_query($sql) or die ('连接错误！');
+$query_two = $DB->query($sql) or die ('连接错误！');
 
 if($query_one && $query_two)
 {

@@ -29,9 +29,9 @@ if($Button == "登录")
 
   if($RadioButton == '学生')
   {
-    $sql = "select * from $User where user_ID='$user_ID' and user_passwd='$user_passwd'";
-    $query = mysql_query($sql) or die (mysql_error());;
-    $num = mysql_num_rows($query);
+    $sql = "select * from $User where user_ID= '$user_ID' and user_passwd= '$user_passwd'";
+    $query = $DB->query($sql) or die (mysql_error());
+    $num = count($query);
     if( $num != 0)
     {
       $expire = 60*60*24*1 +time();

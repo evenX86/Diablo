@@ -24,10 +24,11 @@ if($query)
     echo "<script>alert ('输入有误，请检查！');history.back();</script>";
     exit;
   }//if
-
-  $sql = "select * from $User where user_ID=$student_ID";
-  $query = mysql_query($sql);
-  $count = mysql_num_rows($query);
+  $sql = "select * from $Student where user_ID='$student_ID'";
+ // echo $sql;
+  $result = mysql_query($sql);
+  var_dump($result);
+  $count = mysql_num_rows($result);
   if($count == 0)
   {
     echo "<script>alert ('无此相关记录，请检查！');history.back();</script>";
