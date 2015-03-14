@@ -9,7 +9,7 @@ include("teacher_test.php");
 <head>
 <meta http-equiv="Content-Type" content="text/html"; charset="UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
-<title>鑫湘毕业设计管理系统</title>
+<title>浙江树人大学毕业设计管理系统</title>
 </head>
 
 <body bgcolor="#e3f3ff">

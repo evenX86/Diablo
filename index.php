@@ -2,7 +2,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html"; charset="UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
-<title> 鑫湘毕业设计管理系统</title>
+<title> 浙江树人大学毕业设计管理系统</title>
 </head>
 
 <body>
@@ -17,7 +17,7 @@
 </tr>
 </table>
 
-<hr style="BORDER-BOTTOM-STYLE:dotted;BORDER-LEFT-STYLE:dotted; BORDER-RIGHT-STYLE:dotted; BORDER-TOP-STYLE:dotted" size="5" width="860" color="#40cf79">
+<hr style="border-style: dotted;" size="5" width="860" color="#40cf79">
 
 <table height="400" width="860" align="center" bgcolor="#E3F3FF">
 <tr height="10">

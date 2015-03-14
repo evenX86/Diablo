@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>鑫湘毕业设计管理系统</title>
+<title>浙江树人大学毕业设计管理系统</title>
 <meta http-equiv="Content-Type" content="text/html"; charset="UTF-8">
 <link  rel="stylesheet" href="style.css" type="text/css">
 </head>
@@ -9,7 +9,7 @@
 <table align="center" width="860" cellspacing="6" class="title" bgcolor="#e3f3ff">
 <tr>
 <td align="center">
-鑫湘工作室版权所有
+浙江树人大学工作室版权所有
 </td>
 </tr>
 <tr>

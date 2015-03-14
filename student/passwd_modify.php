@@ -8,7 +8,7 @@ include("sys_header.php");
 <head>
 <meta http-equiv="content-type" content="html/text; charset=utf-8">
 <link ref="stylesheet" href="style.css" type="text/css">
-<title>鑫湘毕业设计系统</title>
+<title>浙江树人大学毕业设计系统</title>
 </head>
 
 <body bgcolor="#e3f3ff">

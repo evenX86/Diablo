@@ -2,7 +2,7 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
-<title>鑫湘毕业设计管理系统</title>
+<title>浙江树人大学毕业设计管理系统</title>
 
 <script type="text/javascript">
 <!--

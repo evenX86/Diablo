@@ -16,7 +16,7 @@ $row = mysql_fetch_array($query);
 <head>
 <meta http-equiv="content-type" type="text/html; charset=utf-8">
 <link ref="stylesheet" href="style.css" type="text/css">
-<title>鑫湘毕业设计管理系统</title>
+<title>浙江树人大学毕业设计管理系统</title>
 </head>
 
 <body bgcolor="#e3f3ff">
