@@ -1,0 +1,27 @@
+.title{font-family:"宋体"; font-size:10pt; font-style:normal; font-weight:bold; line-height:20px; color:#000000; text-decoration:none}
+
+.text{font-family:"宋体"; font-size:12pt; font-weight:bold; line-height:20px; color:#000000; text-decoration:none}
+
+li{list-style-type:none;}
+
+a:link {font-family:"宋体"; font-size:9pt; font-style:normal; color:#e9ffff; text-decoration:none}
+
+a:hover {font-family:"宋体"; font-size:9pt; color:#FF0000; text-decoration:none}
+
+a:visited {font-family:"宋体"; font-size:10pt; color:#e9ffff; text-decoration:none}
+
+/*学生功能导航菜单*/
+.menuHead{color:#e9ffff; font-weight:bold; font-size:small; background-color:#064c82;}
+.menuChoices{color:#000000; background-color:#064c82; width:70px;}
+/*.menu a{color:#e9ffff; text-decoration:none;}*/
+.menu a:hover {text-decoration:underline;}
+
+#menu1 {position:absolute; top:170px; right:800px; width:60px;}
+#menu2 {position:absolute; top:170px; right:700px; width:60px;}
+#menu3 {position:absolute; top:170px; right:600px; width:60px;}
+#menu4 {position:absolute; top:170px; right:500px; width:60px;}
+#menu5 {position:absolute; top:170px; right:400px; width:60px;}
+#menu6 {position:absolute; top:170px; right:300px; width:60px;}
+#menu7 {position:absolute; top:170px; right:210px; width:60px;}
+
+
