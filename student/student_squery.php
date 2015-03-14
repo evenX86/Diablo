@@ -19,17 +19,13 @@ if($query)
     exit;
   }//if
   
-  if(strlen($student_ID)!=8)
-  {
-    echo "<script>alert ('输入有误，请检查！');history.back();</script>";
-    exit;
-  }//if
-  $sql = "select * from $Student where user_ID='$student_ID'";
- // echo $sql;
-  $result = mysql_query($sql);
-  var_dump($result);
-  $count = mysql_num_rows($result);
-  if($count == 0)
+
+  $sql = "select * from $Student where student_ID= '$student_ID'";
+
+  $result = $DB->query($sql);
+  $count = $result->fetchAll()[0];
+
+  if(count($count) == 0)
   {
     echo "<script>alert ('无此相关记录，请检查！');history.back();</script>";
     exit;
@@ -66,16 +62,16 @@ if($query)
 <?php
 }//if
 $sql = "select * from $Student where student_ID='$student_ID'";
-$query = mysql_query($sql);
-$row = mysql_fetch_array($query);
+$query = $DB->query($sql);
+$row = $query->fetchAll()[0];
 ?>
   <tr bgcolor="#FFFFFF" class="text">
-  <td width="5%" align="center"><? echo"".$row['student_ID']."";?></td>
-  <td width="5%" align="center"><? echo"".$row['student_name']."";?></td>
-  <td width="5%" align="center"><? echo"".$row['sex']."";?></td>
-  <td width="20%" align="center"><? echo"".$row['college']."";?></td>
-  <td width="20%" align="center"><? echo"".$row['major']."";?></td>
-  <td width="10%" align="center"><? echo"".$row['class']."";?></td>
+  <td width="5%" align="center"><?php echo"".$row['student_ID']."";?></td>
+  <td width="5%" align="center"><?php echo"".$row['student_name']."";?></td>
+  <td width="5%" align="center"><?php echo"".$row['sex']."";?></td>
+  <td width="20%" align="center"><?php echo"".$row['college']."";?></td>
+  <td width="20%" align="center"><?php echo"".$row['major']."";?></td>
+  <td width="10%" align="center"><?php echo"".$row['class']."";?></td>
 </tr>
 </table>
 
