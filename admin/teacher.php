@@ -169,7 +169,8 @@ if($submit)
   else
   {
     $sql = "insert into $Teacher (teacher_ID,teacher_name,sex,college,major,degree) values ('$teacher_ID','$teacher_name','$sex','$college','$major','$degree')";
-    $query = mysql_query($sql);
+    $query = $DB->prepare($sql);
+    $query->execute();
 
     if($query)
     {
@@ -182,5 +183,5 @@ if($submit)
 ?>
 <br>
 <br>
-<?include("foot.php");?>
+<?php include("foot.php");?>
 

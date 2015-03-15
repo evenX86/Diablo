@@ -53,9 +53,9 @@ include("admin_test.php");
     <?php
     $n = 1;
     $sql = "select count(*) as num from $Subject where audit='审核'";
-    $query = mysql_query($sql) or die ("连接错误！!!!!!!!!!!!!!!!!!");
-    $row = mysql_fetch_array($query);
-    $count = $row[num];
+    $query = $DB->query($sql);
+    $row = $query->rowCount();
+    $count = $row-1;
 
     if (empty($offset)) {
         $offset = 0;
@@ -71,11 +71,12 @@ include("admin_test.php");
 
     $offset = $PAGE_NUM * ($page - 1);
     //$teacher_ID = $_COOKIE['cookie_user_ID'];
-    $sql = "select * from $Subject where audit='审核' order by teacher_ID desc limit $offset,$PAGE_NUM";
-    $query = mysql_query($sql) or die("连接错误！~~~~~~~~~~~~~~");
-
-    while ($row = mysql_fetch_array($query))
+    $sql = "select * from $Subject where audit='审核' order by teacher_ID desc";
+    $query = $DB->query($sql);
+    $result =$query->fetchAll();
+    foreach ($result as $row)
     {
+    var_dump($row);
     if (($n % 2) != 0)
     {
     ?>
@@ -91,19 +92,19 @@ include("admin_test.php");
 
         ?>
         <td width="3%" height="15">
-            <div align="center" class="text"><? echo "" . $n . "";?></div>
+            <div align="center" class="text"><?php echo "" . $n . "";?></div>
         </td>
 
         <td width="3%" height="15">
-            <div align="center" class="text"><? echo "" . $row['subject_ID'] . "";?></div>
+            <div align="center" class="text"><?php echo "" . $row['subject_ID'] . "";?></div>
         </td>
 
         <td width="15%" height="15">
-            <div align="center" class="text"><? echo "" . $row['subject_title'] . "";?></div>
+            <div align="center" class="text"><?php echo "" . $row['subject_title'] . "";?></div>
         </td>
 
         <td width="3%" height="15">
-            <div align="center" class="text"><? echo "" . $row['teacher_ID'] . "";?></div>
+            <div align="center" class="text"><?php echo "" . $row['teacher_ID'] . "";?></div>
         </td>
 
         <?php
@@ -114,11 +115,11 @@ include("admin_test.php");
         ?>
 
         <td width="5%" height="15">
-            <div align="center" class="text"><? echo "" . $row_one['teacher_name'] . "";?></div>
+            <div align="center" class="text"><?php echo "" . $row_one['teacher_name'] . "";?></div>
         </td>
 
         <td width="5%" height="15">
-            <div align="center" class="text"><? echo "" . $row_one['degree'] . "";?></div>
+            <div align="center" class="text"><?php echo "" . $row_one['degree'] . "";?></div>
         </td>
 
         <td width="4%" height="15">
@@ -141,7 +142,7 @@ include("admin_test.php");
 <table width="860" border="0" cellspacing="0" cellpadding="0" align="center" class='text'>
     <tbody>
     <tr>
-        <td width="200"><font color="#ff0000"><? echo "目前共有" . $count . "条记录." ?></font></td>
+        <td width="200"><font color="#ff0000"><?php echo "目前共有" . $count . "条记录." ?></font></td>
         <td width="200"><? echo "共" . $pages . "页"; ?></td>
 
         <?php
@@ -189,4 +190,4 @@ include("admin_test.php");
 
 <br>
 <br>
-<? include("foot.php") ?>
+<?php include("foot.php") ?>

@@ -169,18 +169,24 @@ if($submit)
   else
   {
     $sql = "insert into $Student (student_ID,student_name,sex,college,major,class) values ('$student_ID','$student_name','$sex','$college','$major','$class')";
-    $query = mysql_query($sql);
+    $query = $DB->prepare($sql);
+    $flag = $query->execute();
 
-    if($query)
+    if($flag)
     {
       echo "<script>alert ('学生信息添加成功！');</script>";
       echo "<html><meta http-equiv=\"refresh\" content=\"0; url=student.php \"></html>";
       exit();
     }//if
+     else {
+       echo "<script>alert ('学生信息添加失败！');</script>";
+       echo "<html><meta http-equiv=\"refresh\" content=\"0; url=student.php \"></html>";
+       exit();
+     }
   }//else
 }//if
 ?>
 <br>
 <br>
-<?include("foot.php");?>
+<?php include("foot.php");?>
 
