@@ -84,8 +84,8 @@ if($send == '发送')
   else
   {
     $sql = "select * from $User where user_ID='$to'";
-    $query = mysql_query($sql);
-    $count = mysql_num_rows($query);
+    $query = $DB->query($sql);
+    $count = count($query->fetchAll()[0]);
     if($count == 0)
     {
       echo "<script>alert ('收件人不存在，请检查！');</script>";
@@ -131,7 +131,8 @@ if($send == '发送')
   {
     $time = date("Y-m-d");
     $sql = "insert into $Message (M_title,M_content,M_from,M_to,M_time,M_upfilename) value ('$subject','$body','$from','$to','$time','$fileName')";
-    $query = mysql_query($sql);
+    $query = $DB->query($sql);
+    $query = $query->fetchAll();
     if($query)
     {
       echo "<script>alert ('发送成功！');</script>";

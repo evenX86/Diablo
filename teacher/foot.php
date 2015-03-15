@@ -14,7 +14,7 @@
 </tr>
 <tr>
 <td align="center">
-Copyright 2010 &copy; Xin-Xiang Department 
+Copyright 2015 &copy; zjsrc Department
 </td>
 </tr>
 

@@ -146,10 +146,10 @@ else
     }//else
 ?>
 
-  <td width="5%"><div align="center" class="text"><? echo "".$row_one['teacher_ID'].""; ?></div></td>
-  <td width="5%"><div align="center" class="text"><? echo "".$row_one['teacher_name'].""; ?></div></td>
-  <td width="5%"><div align="center" class="text"><? echo "".$row_one['sex'].""; ?></div></td>
-  <td width="5%"><div align="center" class="text"><? echo "".$row_one['degree'].""; ?></div></td>
+  <td width="5%"><div align="center" class="text"><?php echo "".$row_one['teacher_ID'].""; ?></div></td>
+  <td width="5%"><div align="center" class="text"><?php echo "".$row_one['teacher_name'].""; ?></div></td>
+  <td width="5%"><div align="center" class="text"><?php echo "".$row_one['sex'].""; ?></div></td>
+  <td width="5%"><div align="center" class="text"><?php echo "".$row_one['degree'].""; ?></div></td>
 
 <?php
     $teacher_ID = $row_one['teacher_ID'];
@@ -158,13 +158,13 @@ else
     $row_two = mysql_fetch_array($query_two);
 ?>
 
-  <td width="10%"><div align="center" class="text"><? echo "".$row_two['email'].""; ?></div></td>
-  <td width="10%"><div align="center" class="text"><? echo "".$row_two['tel_num'].""; ?></div></td>
+  <td width="10%"><div align="center" class="text"><?php echo "".$row_two['email'].""; ?></div></td>
+  <td width="10%"><div align="center" class="text"><?php echo "".$row_two['tel_num'].""; ?></div></td>
 
 
-  <td width="13%"><div align="center" class="text"><? echo "".$row_one['college'].""; ?></div></td>
-  <td width="17%"><div align="center" class="text"><? echo "".$row_one['major'].""; ?></div></td>
-  <td width="5%"><div align="center" class="text"><? echo "<a href=teacher_del.php?teacher_ID=".$row_one['teacher_ID']."><font color=\"#bc0000\" size=\"4\">删除</font></a>"; ?></div></td>
+  <td width="13%"><div align="center" class="text"><?php echo "".$row_one['college'].""; ?></div></td>
+  <td width="17%"><div align="center" class="text"><?php echo "".$row_one['major'].""; ?></div></td>
+  <td width="5%"><div align="center" class="text"><?php echo "<a href=teacher_del.php?teacher_ID=".$row_one['teacher_ID']."><font color=\"#bc0000\" size=\"4\">删除</font></a>"; ?></div></td>
 </tr>
 <?php
   $n++;
@@ -176,9 +176,9 @@ else
 <tbody>
 <tr>
 <td width="159">
-<font color="#FF0000"><? echo "目前共有".$count."条记录"?></font>
+<font color="#FF0000"><?php echo "目前共有".$count."条记录"?></font>
 </td>
-<td width="205"><? echo "共".$pages."页"; ?></td>
+<td width="205"><?php echo "共".$pages."页"; ?></td>
 
 <?php
   $first = 1;

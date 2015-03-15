@@ -76,14 +76,14 @@ $query = mysql_query($sql);
 $row = mysql_fetch_array($query);
 ?>
   <tr bgcolor="#FFFFFF" class="text">
-  <td width="5%" align="center"><? echo"".$row['user_ID']."";?></td>
-  <td width="5%" align="center"><? echo"".$row['sex']."";?></td>
-  <td width="10%" align="center"><? echo"".$row['email']."";?></td>
-  <td width="5%" align="center"><? echo"".$row['tel_num']."";?></td>
-  <td width="10%" align="center"><? echo"".$row['college']."";?></td>
-  <td width="10%" align="center"><? echo"".$row['major']."";?></td>
-  <td width="5%" align="center"><? echo"".$row['degree']."";?></td>
-  <td width="10%" align="center"><? echo"".$row['address']."";?></td>
+  <td width="5%" align="center"><?php echo"".$row['user_ID']."";?></td>
+  <td width="5%" align="center"><?php echo"".$row['sex']."";?></td>
+  <td width="10%" align="center"><?php echo"".$row['email']."";?></td>
+  <td width="5%" align="center"><?php echo"".$row['tel_num']."";?></td>
+  <td width="10%" align="center"><?php echo"".$row['college']."";?></td>
+  <td width="10%" align="center"><?php echo"".$row['major']."";?></td>
+  <td width="5%" align="center"><?php echo"".$row['degree']."";?></td>
+  <td width="10%" align="center"><?php echo"".$row['address']."";?></td>
 </tr>
 </table>
 

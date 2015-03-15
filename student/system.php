@@ -159,9 +159,9 @@ include("student_test.php");
 <table width="860" border="0" cellspacing="0" cellpadding="0" align="center" class='text'>
     <tbody>
     <tr>
-        <td width="200"><font color="#ff0000"><? $n--;
+        <td width="200"><font color="#ff0000"><?php $n--;
                 echo "目前共有" . $n . "条记录." ?></font></td>
-        <td width="200"><? echo "共" . $pages . "页"; ?></td>
+        <td width="200"><?php echo "共" . $pages . "页"; ?></td>
 
         <?php
         $first = 1;
@@ -287,4 +287,4 @@ if ($count != 0)
 </html>
 <br>
 <br>
-<? include("foot.php") ?>
+<?php include("foot.php") ?>

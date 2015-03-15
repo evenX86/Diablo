@@ -80,8 +80,8 @@ if($send == '发送')
   else
   {
     $sql = "select * from $User where user_ID='$to'";
-    $query = mysql_query($sql);
-    $count = mysql_num_rows($query);
+    $query = $DB->query($sql);
+    $count = count($query->fetchAll()[0]);
     if($count == 0)
     {
       echo "<script>alert ('收件人不存在，请检查！');</script>";

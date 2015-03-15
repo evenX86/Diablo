@@ -84,13 +84,13 @@ $query = mysql_query($sql);
 $row_three = mysql_fetch_array($query);
 ?>
   <tr bgcolor="#FFFFFF" class="text">
-  <td width="5%" align="center"><? echo"".$row_one['subject_ID']."";?></td>
-  <td width="15%" align="center"><? echo"".$row_one['subject_title']."";?></td>
-  <td width="5%" align="center"><? echo"".$row_one['teacher_ID']."";?></td>
-  <td width="5%" align="center"><? echo"".$row_two['teacher_name']."";?></td>
-  <td width="5%" align="center"><? echo"".$row_one['student_ID']."";?></td>
-  <td width="5%" align="center"><? echo"".$row_three['student_name']."";?></td>
-  <td width="5%" align="center"><? echo"".$row_one['status']."";?></td>
+  <td width="5%" align="center"><?php echo"".$row_one['subject_ID']."";?></td>
+  <td width="15%" align="center"><?php echo"".$row_one['subject_title']."";?></td>
+  <td width="5%" align="center"><?php echo"".$row_one['teacher_ID']."";?></td>
+  <td width="5%" align="center"><?php echo"".$row_two['teacher_name']."";?></td>
+  <td width="5%" align="center"><?php echo"".$row_one['student_ID']."";?></td>
+  <td width="5%" align="center"><?php echo"".$row_three['student_name']."";?></td>
+  <td width="5%" align="center"><?php echo"".$row_one['status']."";?></td>
 </tr>
 </table>
 

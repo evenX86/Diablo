@@ -26,7 +26,7 @@ include("sys_header.php");
 <div align="center" class="text">用户名</div>
 </td>
 <td align="center" class="text">
-<? echo "".$_COOKIE['cookie_user_ID']."";?>
+<?php echo "".$_COOKIE['cookie_user_ID']."";?>
 </td>
 </tr>
 
@@ -83,8 +83,8 @@ if($modify == "确认")
   else
   {
     $sql = "select user_passwd from $User where user_ID='$student_ID'";
-    $query = mysql_query($sql);
-    $row = mysql_fetch_array($query);
+    $query = $DB->query($sql);
+    $row = $query->fetchAll()[0];
     if($user_passwd != $row['user_passwd'])
     {
       echo "<script>alert ('旧密码错误，请检查！');</script>";
@@ -99,7 +99,13 @@ if($modify == "确认")
     else
     {
       $sql = "update table $User set user_passwd='$passwd' where user_ID='$student'";
-      $query = mysql_query($sql);
+      $query = $DB->prepare($sql);
+      $query = $query->execute();
+      if ($query) {
+        echo "<script>alert ('修改成功！');</script>";
+      } else{
+        echo "<script>alert ('修改失败！');</script>";
+      }
     }//else
   }//else
 }//if
@@ -108,4 +114,4 @@ if($modify == "确认")
 
 <br>
 <br>
-<? include("foot.php") ?>
+<?php include("foot.php") ?>

@@ -43,7 +43,7 @@ include("teacher_test.php");
 <td width="125" bgcolor="#aadeff" align="center">教师编号</td>
 <td width="262" bgcolor="#aadeff" height="30" colspan="2">
 <div align="center">
-<? echo "".$_COOKIE['cookie_user_ID']."";?>
+<?php echo "".$_COOKIE['cookie_user_ID']."";?>
 </div>
 </td>
 </tr>
@@ -52,7 +52,7 @@ include("teacher_test.php");
 <td width="125" bgcolor="#FFFFFF" align="center">论文状态</td>
 <td width="262" bgcolor="#FFFFFF" height="30" colspan="2">
 <div align="center">
-<? echo "未选";?>
+<?php echo "未选";?>
 </div>
 </td>
 </tr>
@@ -84,7 +84,8 @@ if($submit)
   else
   {
     $sql = "insert into $Subject (subject_ID,subject_title,teacher_ID,status) values ('$subject_ID','$subject_title','$teacher_ID','未选')";
-    $query = mysql_query($sql);
+    $query = $DB->prepare($sql);
+    $query = $query->execute();
 
     if($query)
     {

@@ -6,7 +6,8 @@ include("connect.php");
 $M_from = $_GET['M_from'];
 $M_time = $_GET['M_time'];
 $sql = "delete from $Message where M_from='$M_from' and M_time='$M_time'";
-$query = mysql_query($sql) or die ('连接错误！');
+$query = $DB->prepare($sql) or die ('连接错误！');
+$query = $query->execute();
 if($query)
 {
   echo "<script>alert ('信息删除成功！');</script>";

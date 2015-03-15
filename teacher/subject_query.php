@@ -126,29 +126,29 @@ else
     }//else
 ?>
 
-  <td width="5%"><div align="center" class="text"><? echo "".$row_one['subject_ID'].""; ?></div></td>
-  <td width="20%"><div align="center" class="text"><? echo "".$row_one['subject_title'].""; ?></div></td>
-  <td width="5%"><div align="center" class="text"><? echo "".$row_one['teacher_ID'].""; ?></div></td>
+  <td width="5%"><div align="center" class="text"><?php echo "".$row_one['subject_ID'].""; ?></div></td>
+  <td width="20%"><div align="center" class="text"><?php echo "".$row_one['subject_title'].""; ?></div></td>
+  <td width="5%"><div align="center" class="text"><?php echo "".$row_one['teacher_ID'].""; ?></div></td>
 
 <?php
     $teacher_ID = $row_one['teacher_ID'];
     $sql_two = "select teacher_name from $Teacher where teacher_ID='$teacher_ID'";
-    $query_two = mysql_query($sql_two);
-    $row_two = mysql_fetch_array($query_two);
+    $query_two = $DB->query($sql_two);
+    $row_two = $query_two->fetchAll()[0];
 ?>
 
-  <td width="7%"><div align="center" class="text"><? echo "".$row_two['teacher_name'].""; ?></div></td>
-  <td width="5%"><div align="center" class="text"><? echo "".$row_one['student_ID'].""; ?></div></td>
+  <td width="7%"><div align="center" class="text"><?php echo "".$row_two['teacher_name'].""; ?></div></td>
+  <td width="5%"><div align="center" class="text"><?php echo "".$row_one['student_ID'].""; ?></div></td>
 
 <?php
     $student_ID = $row_one['student_ID'];
     $sql_three = "select student_name from $Student where student_ID='$student_ID'";
-    $query_three = mysql_query($sql_three);
-    $row_three = mysql_fetch_array($query_three);
+    $query_three = $DB->query($sql_three);
+    $row_three = $query_three->fetchAll()[0];
 ?>
 
-  <td width="7%"><div align="center" class="text"><? echo "".$row_three['student_name'].""; ?></div></td>
-  <td width="7%"><div align="center" class="text"><? echo "".$row_one['status'].""; ?></div></td>
+  <td width="7%"><div align="center" class="text"><?php echo "".$row_three['student_name'].""; ?></div></td>
+  <td width="7%"><div align="center" class="text"><?php echo "".$row_one['status'].""; ?></div></td>
 </tr>
 <?php
   $n++;
@@ -160,9 +160,9 @@ else
 <tbody>
 <tr>
 <td width="159">
-<font color="#FF0000"><? echo "目前共有".$count."条记录"?></font>
+<font color="#FF0000"><?php echo "目前共有".$count."条记录"?></font>
 </td>
-<td width="205"><? echo "共".$pages."页"; ?></td>
+<td width="205"><?php echo "共".$pages."页"; ?></td>
 
 <?php
   $first = 1;

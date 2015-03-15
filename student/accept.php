@@ -30,9 +30,9 @@ $n = 1;
 
 $to = $_COOKIE['cookie_user_ID'];
 $sql_one = "select count(*) as num from $Message where M_to='$to'";
-$query_one = mysql_query($sql_one);
-$row_one = mysql_fetch_array($query_one);
-$count = $row_one[num];
+$query_one = $DB->query($sql_one);
+$row_one = $query_one->fetchAll();
+$count = count($row_one[0]);
 
 $pages = ceil($count/$PAGE_NUM);
 if(isset($_GET['page']))
@@ -45,9 +45,9 @@ else
 }//else
 $offset = $PAGE_NUM*($page - 1);
 $sql = "select M_from,M_title,M_time from $Message where M_to='$to' order by M_time desc limit $offset,$PAGE_NUM";
-$query = mysql_query($sql) or die ('连接错误！');
-
-while($row = mysql_fetch_array($query))
+$query = $DB->query($sql) or die ('连接错误！');
+$res = $query->fetchAll()[0];
+foreach($res as $row)
 {
   if(($n%2)!=0)
   {
@@ -62,17 +62,17 @@ while($row = mysql_fetch_array($query))
 <?php
   }//else
 ?>
-  <td width="30%"><div class="title"><? echo "".$row['M_from'].""; ?></div></td>
+  <td width="30%"><div class="title"><?php echo "".$row['M_from'].""; ?></div></td>
 <?php
   $M_title = $row['M_title'];
   $sql_two = "select M_ID from $Message where M_to='$to' and M_title='$M_title'";
-  $query_two = mysql_query($sql_two);
-  $row_two = mysql_fetch_array($query_two);
+  $query_two = $DB->query($sql_two);
+  $row_two = $query_two->fetchAll();
 ?>
-  <td width="35%"><div class="title"><? echo "<a href=accept_content.php?M_from=".$row['M_from']."&M_ID=".$row_two['M_ID']."><font color=\"#000000\">".$row['M_title']."</font></a>"; ?></div></td>
+  <td width="35%"><div class="title"><?php echo "<a href=accept_content.php?M_from=".$row['M_from']."&M_ID=".$row_two['M_ID']."><font color=\"#000000\">".$row['M_title']."</font></a>"; ?></div></td>
 
-  <td width="20%"><div class="title"><? echo "".$row['M_time'].""; ?></div></td>
-  <td width="15%"><div align="right" class="title"><? echo "<a href=accept_del.php?M_from=".$row['M_from']."&M_time=".$row['M_time']."><font color=\"#bc0000\" size=\"3\">删除</font></a>"; ?></div></td>
+  <td width="20%"><div class="title"><?php echo "".$row['M_time'].""; ?></div></td>
+  <td width="15%"><div align="right" class="title"><?php echo "<a href=accept_del.php?M_from=".$row['M_from']."&M_time=".$row['M_time']."><font color=\"#bc0000\" size=\"3\">删除</font></a>"; ?></div></td>
 </tr>
 <?php
   $n++;
@@ -85,9 +85,9 @@ while($row = mysql_fetch_array($query))
 <tbody>
 <tr>
 <td width="159">
-<font color="#FF0000"><? echo "目前共有".$count."条记录"?></font>
+<font color="#FF0000"><?php echo "目前共有".$count."条记录"?></font>
 </td>
-<td width="205"><? echo"共有".$pages."页";?></td>
+<td width="205"><?php echo"共有".$pages."页";?></td>
 
 <?php
 $first = 1;
@@ -134,4 +134,4 @@ if($page < $pages)
 
 <br>
 <br>
-<? include("foot.php");?>
+<?php include("foot.php");?>

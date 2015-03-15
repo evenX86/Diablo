@@ -8,8 +8,8 @@ $M_ID = $_GET['M_ID'];
 $M_from = $_GET['M_from'];
 
 $sql = "select M_title,M_time,M_to,M_content from $Message where M_ID='$M_ID'";
-$query = mysql_query($sql);
-$row = mysql_fetch_array($query);
+$query = $DB->query($sql);
+$row = $query->fetchAll()[0];
 ?>
 
 <html>
@@ -23,14 +23,14 @@ $row = mysql_fetch_array($query);
 <table width="860" align="center" border="0">
 <tr>
 <td class="text" align="left">
-主题：<? echo "".$row['M_title']."";?>
+主题：<?php echo "".$row['M_title']."";?>
 </td>
 </tr>
 
 <tr>
 <td>
 <font color="#394e55" size="2">
-发件人：<? echo "".$M_from."";?>
+发件人：<?php echo "".$M_from."";?>
 </font>
 </td>
 </tr>
@@ -38,7 +38,7 @@ $row = mysql_fetch_array($query);
 <tr>
 <td>
 <font color="#394e55" size="2">
-时&nbsp;&nbsp;&nbsp;间：<? echo "".$row['M_time']."";?>
+时&nbsp;&nbsp;&nbsp;间：<?php echo "".$row['M_time']."";?>
 </font>
 </td>
 </tr>
@@ -46,14 +46,14 @@ $row = mysql_fetch_array($query);
 <tr>
 <td>
 <font color="#394e55" size="2">
-收件人：<? echo "".$row['M_to']."";?>
+收件人：<?php echo "".$row['M_to']."";?>
 </font>
 </td>
 </tr>
 
 <tr>
 <td bgcolor="#FFFFFF">
-<? echo "".$row['M_content']."";?>
+<?php echo "".$row['M_content']."";?>
 </td>
 </tr>
 
@@ -62,4 +62,4 @@ $row = mysql_fetch_array($query);
 </html>
 
 <br>
-<? include("foot.php");?>
+<?php include("foot.php");?>

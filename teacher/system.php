@@ -54,9 +54,9 @@ include("teacher_test.php");
 $n=1;
 $teacher_ID = $_COOKIE['cookie_user_ID'];
 $sql = "select count(*) as num from $Subject where teacher_ID='$teacher_ID'";
-$query = mysql_query($sql) or die ("连接错误！!!!!!!!!!!!!!!!!!");
-$row = mysql_fetch_array($query);
-$count = $row[num];
+$query = $DB->query($sql) or die ("连接错误！!!!!!!!!!!!!!!!!!");
+$row = $query->fetchAll()[0];
+$count = count($row)-1;;
 
 if(empty($offset))
 {
@@ -76,9 +76,9 @@ else
 $offset = $PAGE_NUM*($page - 1);
 //$teacher_ID = $_COOKIE['cookie_user_ID'];
 $sql = "select * from $Subject where teacher_ID='$teacher_ID' order by teacher_ID desc limit $offset,$PAGE_NUM";
-$query = mysql_query($sql) or die("连接错误！~~~~~~~~~~~~~~");
+$query = $DB->query($sql) or die("连接错误！~~~~~~~~~~~~~~");
 
-while($row=mysql_fetch_array($query))
+foreach($query->fetchAll()[0] as $row)
 {
   if(($n%2)!=0)
   {
@@ -95,34 +95,34 @@ while($row=mysql_fetch_array($query))
 
 ?>
 <td width="3%" height="15">
-<div align="center" class="text"><? echo "".$n."";?></div>
+<div align="center" class="text"><?php echo "".$n."";?></div>
 </td>
 
 <td width="3%" height="15">
-<div align="center" class="text"><? echo "".$row['subject_ID']."";?></div>
+<div align="center" class="text"><?php echo "".$row['subject_ID']."";?></div>
 </td>
 
 <td width="15%" height="15">
-<div align="center" class="text"><? echo "".$row['subject_title']."";?></div>
+<div align="center" class="text"><?php echo "".$row['subject_title']."";?></div>
 </td>
 
 <td width="3%" height="15">
-<div align="center" class="text"><? echo "".$row['teacher_ID']."";?></div>
+<div align="center" class="text"><?php echo "".$row['teacher_ID']."";?></div>
 </td>
 
 <?php
   $teacher_ID = $row['teacher_ID'];
   $sql_one = "select teacher_name,degree from $Teacher where teacher_ID='$teacher_ID'";
-  $query_one = mysql_query($sql_one) or die('连接错误..........！');
-  $row_one = mysql_fetch_array($query_one);
+  $query_one = $DB->query($sql_one) or die('连接错误..........！');
+  $row_one = $query_one->fetchAll()[0];
 ?>
 
 <td width="5%" height="15">
-<div align="center" class="text"><? echo "".$row_one['teacher_name']."";?></div>
+<div align="center" class="text"><?php echo "".$row_one['teacher_name']."";?></div>
 </td>
 
 <td width="5%" height="15">
-<div align="center" class="text"><? echo "".$row_one['degree']."";?></div>
+<div align="center" class="text"><?php echo "".$row_one['degree']."";?></div>
 </td>
 
 <td width="4%" height="15">
@@ -150,8 +150,8 @@ while($row=mysql_fetch_array($query))
 <table width="860" border="0" cellspacing="0" cellpadding="0" align="center" class='text'>
 <tbody>
 <tr>
-<td width="200"><font color="#ff0000"><? echo"目前共有".$count."条记录."?></font></td>
-<td width="200"><? echo"共".$pages."页";?></td>
+<td width="200"><font color="#ff0000"><?php echo"目前共有".$count."条记录."?></font></td>
+<td width="200"><?php echo"共".$pages."页";?></td>
 
 <?php
 $first = 1;

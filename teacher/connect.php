@@ -8,19 +8,18 @@ $Hostname = "localhost";
 $DBname = "gmsdb";
 $DBuser = "root";
 $DBpassword = "123456";
-$DB = mysql_connect($Hostname,$DBuser,$DBpassword) or die ("服务器连接错误！");
-mysql_select_db($DBname,$DB) or die ("数据库连接错误！");
+$DB = new PDO("mysql:host=localhost;dbname=$DBname",$DBuser,$DBpassword);
 
-$User = "User";
-$Student = "Student";
-$Teacher = "Teacher"; 
-$Admin = "Admin";
+$User = "user";
+$Student = "student";
+$Teacher = "teacher";
+$Admin = "admin";
 $Information = "Information";
-$Message = "Message";
-$Subject = "Subject";
+$Massage = "message";
+$Subject = "subject";
 $Docunment = "Docunment";
-$Config = "Config";
-$Mark = "Mark";
+$Config = "config";
+$Mark = "mark";
 
 $PAGE_NUM = 15; 
 $MAX_NUM = 4;

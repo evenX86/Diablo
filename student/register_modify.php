@@ -100,26 +100,30 @@ if($modify == "修改")
     if($question)
     {
       $sql = "update table $User set question='$question' where user_ID='$student_ID'";
-      $query = mysql_query($sql);
+      $query = $DB->prepare($sql);
+      $query->execute();
     }//if
 
     if($answer)
     {
       $sql = "update table $User set answer='$answer' where user_ID='$student_ID'";
-      $query = mysql_query($sql);
+      $query = $DB->prepare($sql);
+      $query->execute();
     }//if
 
     if($email)
     {
       if(!eregi("^[_\.0-9a-z-]+@([0-9a-z][0-9a-z][0-9a-z-]+\.)+[a-z]{2,3}$",$email))
       {
-       echo "<script>alert ('E-mail格式不对！');history.back();</script>"; 
+       echo "<script>alert ('E-mail格式不对！');history.back();</script>";
+
        exit;
       }//if
       else
       {
         $sql = "update table $User set email='$email' where user_ID='$student_ID'";
-        $query = mysql_query($sql);
+        $query = $DB->prepare($sql);
+        $query->execute();
       }//else
     }//if
 
@@ -128,14 +132,16 @@ if($modify == "修改")
       if(strlen($tel_num)=='11')
       {
       $sql = "update table $User set tel_num='$tel_num' where user_ID='$student_ID'";
-      $query = mysql_query($sql);
+      $query = $DB->prepare($sql);
+        $query->execute();
       }
     }//if
 
     if($address)
     {
       $sql = "update table $User set address='$address' where user_ID='$student_ID'";
-      $query = mysql_query($sql);
+      $query = $DB->prepare($sql);
+      $query->execute();
     }//if
 
     echo "<script>alert ('修改成功！');</script>";

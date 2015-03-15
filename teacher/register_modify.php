@@ -100,13 +100,15 @@ if($modify == "修改")
     if($question)
     {
       $sql = "update table $User set question='$question' where user_ID='$student_ID'";
-      $query = mysql_query($sql);
+      $query = $DB->prepare($sql);
+      $query->execute();
     }//if
 
     if($answer)
     {
       $sql = "update table $User set answer='$answer' where user_ID='$student_ID'";
-      $query = mysql_query($sql);
+      $query = $DB->prepare($sql);
+      $query->execute();
     }//if
 
     if($email)
@@ -119,7 +121,8 @@ if($modify == "修改")
       else
       {
         $sql = "update table $User set email='$email' where user_ID='$student_ID'";
-        $query = mysql_query($sql);
+        $query = $DB->prepare($sql);
+        $query->execute();
       }//else
     }//if
 
@@ -128,14 +131,16 @@ if($modify == "修改")
       if(strlen($tel_num)=='11')
       {
       $sql = "update table $User set tel_num='$tel_num' where user_ID='$student_ID'";
-      $query = mysql_query($sql);
+        $query = $DB->prepare($sql);
+        $query->execute();
       }
     }//if
 
     if($address)
     {
       $sql = "update table $User set address='$address' where user_ID='$student_ID'";
-      $query = mysql_query($sql);
+      $query = $DB->prepare($sql);
+      $query->execute();
     }//if
 
     echo "<script>alert ('修改成功！');</script>";
@@ -144,5 +149,5 @@ if($modify == "修改")
 
 ?>
 
-<?include("foot.php")?>
+<?php  include("foot.php")?>
 

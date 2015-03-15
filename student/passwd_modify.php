@@ -25,7 +25,7 @@ include("sys_header.php");
 <div align="center" class="text">用户名</div>
 </td>
 <td align="center" class="text">
-<? echo "".$_COOKIE['cookie_user_ID']."";?>
+<?php echo "".$_COOKIE['cookie_user_ID']."";?>
 </td>
 </tr>
 
@@ -107,4 +107,4 @@ if($modify == "确认")
 
 <br>
 <br>
-<? include("foot.php") ?>
+<?php include("foot.php") ?>

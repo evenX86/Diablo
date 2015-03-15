@@ -21,7 +21,7 @@ include("teacher_test.php");
 
 <tr>
 <td align="left" class="text">
-发件人：<?echo "".$_COOKIE['cookie_user_ID']."";?><br>
+发件人：<?php echo "".$_COOKIE['cookie_user_ID']."";?><br>
 </td>
 </tr>
 
@@ -71,9 +71,9 @@ if($send == '发送')
   else
   {
     $sql = "select * from $User where user_ID='$to'";
-    $query = mysql_query($sql);
-    $count = mysql_num_rows($query);
-    if($count == 0)
+    $query = $DB->query($sql);
+    $count = $query->fetchAll()[0];
+    if(count($count) == 0)
     {
       echo "<script>alert ('收件人不存在，请检查！');</script>";
       exit();
@@ -89,7 +89,8 @@ if($send == '发送')
   $from = $_COOKIE['cookie_user_ID'];
   $time = date("Y-m-d");
  $sql = "insert into $Message (M_title,M_content,M_from,M_to,M_time) value ('$subject','$content','$from','$to','$time')";
-  $query = mysql_query($sql);
+  $query = $DB->prepare($sql);
+  $query = $query->execute();
   if($query)
   {
     echo "<script>alert ('发送成功！');</script>";

@@ -127,9 +127,9 @@ else
     }//else
 ?>
 
-  <td width="5%"><div align="center" class="text"><? echo "".$row_one['subject_ID'].""; ?></div></td>
-  <td width="20%"><div align="center" class="text"><? echo "".$row_one['subject_title'].""; ?></div></td>
-  <td width="5%"><div align="center" class="text"><? echo "".$row_one['teacher_ID'].""; ?></div></td>
+  <td width="5%"><div align="center" class="text"><?php echo "".$row_one['subject_ID'].""; ?></div></td>
+  <td width="20%"><div align="center" class="text"><?php echo "".$row_one['subject_title'].""; ?></div></td>
+  <td width="5%"><div align="center" class="text"><?php echo "".$row_one['teacher_ID'].""; ?></div></td>
 
 <?php
     $teacher_ID = $row_one['teacher_ID'];
@@ -138,8 +138,8 @@ else
     $row_two = mysql_fetch_array($query_two);
 ?>
 
-  <td width="7%"><div align="center" class="text"><? echo "".$row_two['teacher_name'].""; ?></div></td>
-  <td width="7%"><div align="center" class="text"><? echo "".$row_one['student_ID'].""; ?></div></td>
+  <td width="7%"><div align="center" class="text"><?php echo "".$row_two['teacher_name'].""; ?></div></td>
+  <td width="7%"><div align="center" class="text"><?php echo "".$row_one['student_ID'].""; ?></div></td>
 
 <?php
     $student_ID = $row_one['student_ID'];
@@ -148,9 +148,9 @@ else
     $row_three = mysql_fetch_array($query_three);
 ?>
 
-  <td width="7%"><div align="center" class="text"><? echo "".$row_three['student_name'].""; ?></div></td>
-  <td width="7%"><div align="center" class="text"><? echo "".$row_one['status'].""; ?></div></td>
-  <td width="5%"><div align="center" class="text"><? echo "<a href=subject_del.php?subject_ID=".$row_one['subject_ID']."><font color=\"#bc0000\" size=\"4\">删除</font></a>"; ?></div></td>
+  <td width="7%"><div align="center" class="text"><?php echo "".$row_three['student_name'].""; ?></div></td>
+  <td width="7%"><div align="center" class="text"><?php echo "".$row_one['status'].""; ?></div></td>
+  <td width="5%"><div align="center" class="text"><?php echo "<a href=subject_del.php?subject_ID=".$row_one['subject_ID']."><font color=\"#bc0000\" size=\"4\">删除</font></a>"; ?></div></td>
 </tr>
 <?php
   $n++;
@@ -162,9 +162,9 @@ else
 <tbody>
 <tr>
 <td width="159">
-<font color="#FF0000"><? echo "目前共有".$count."条记录"?></font>
+<font color="#FF0000"><?php echo "目前共有".$count."条记录"?></font>
 </td>
-<td width="205"><? echo "共".$pages."页"; ?></td>
+<td width="205"><?php echo "共".$pages."页"; ?></td>
 
 <?php
   $first = 1;

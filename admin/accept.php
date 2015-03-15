@@ -63,7 +63,7 @@ foreach($result as $row)
 <?php
   }//else
 ?>
-  <td width="30%"><div class="title"><? echo "".$row['M_from'].""; ?></div></td>
+  <td width="30%"><div class="title"><?php echo "".$row['M_from'].""; ?></div></td>
 <?php
   $M_title = $row['M_title'];
   $sql_two = "select M_ID from $Message where M_to='$to' and M_title='$M_title'";

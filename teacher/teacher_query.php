@@ -87,8 +87,8 @@ if($query)
     $sql = $sql."and major like '%$major'";
   }//if
 
-$query = mysql_query($sql);
-$count = mysql_num_rows($query);
+$query = $DB->query($sql);
+$count = $query->rowCount();
 if(empty($count))
 {
   echo "<script>alert ('无相关记录,请检查！');history.back();</script>";
@@ -127,9 +127,9 @@ else
   $offset = $PAGE_NUM*($page - 1);
 
   $sql_one = $sql."order by teacher_ID desc limit $offset,$PAGE_NUM";
-  $query = mysql_query($sql_one) or die("连接错误！");;
+  $query = $DB->query($sql_one) or die("连接错误！");;
 //  $row_one = mysql_fetch_array($query);
-  while($row_one = mysql_fetch_array($query))
+  foreach($query->fetchAll()[0] as $row_one)
   {
     if(($n%2)!=0)
     {
@@ -145,24 +145,24 @@ else
     }//else
 ?>
 
-  <td width="5%"><div align="center" class="text"><? echo "".$row_one['teacher_ID'].""; ?></div></td>
-  <td width="5%"><div align="center" class="text"><? echo "".$row_one['teacher_name'].""; ?></div></td>
-  <td width="5%"><div align="center" class="text"><? echo "".$row_one['sex'].""; ?></div></td>
-  <td width="5%"><div align="center" class="text"><? echo "".$row_one['degree'].""; ?></div></td>
+  <td width="5%"><div align="center" class="text"><?php echo "".$row_one['teacher_ID'].""; ?></div></td>
+  <td width="5%"><div align="center" class="text"><?php echo "".$row_one['teacher_name'].""; ?></div></td>
+  <td width="5%"><div align="center" class="text"><?php echo "".$row_one['sex'].""; ?></div></td>
+  <td width="5%"><div align="center" class="text"><?php echo "".$row_one['degree'].""; ?></div></td>
 
 <?php
     $teacher_ID = $row_one['teacher_ID'];
     $sql_two = "select email,tel_num from $User where user_ID='$teacher_ID'";
-    $query_two = mysql_query($sql_two);
-    $row_two = mysql_fetch_array($query_two);
+    $query_two = $DB->query($sql_two);
+    $row_two = $query_two->fetchAll()[0];
 ?>
 
-  <td width="10%"><div align="center" class="text"><? echo "".$row_two['email'].""; ?></div></td>
-  <td width="10%"><div align="center" class="text"><? echo "".$row_two['tel_num'].""; ?></div></td>
+  <td width="10%"><div align="center" class="text"><?php echo "".$row_two['email'].""; ?></div></td>
+  <td width="10%"><div align="center" class="text"><?php echo "".$row_two['tel_num'].""; ?></div></td>
 
 
-  <td width="13%"><div align="center" class="text"><? echo "".$row_one['college'].""; ?></div></td>
-  <td width="17%"><div align="center" class="text"><? echo "".$row_one['major'].""; ?></div></td>
+  <td width="13%"><div align="center" class="text"><?php echo "".$row_one['college'].""; ?></div></td>
+  <td width="17%"><div align="center" class="text"><?php echo "".$row_one['major'].""; ?></div></td>
 </tr>
 <?php
   $n++;
@@ -174,9 +174,9 @@ else
 <tbody>
 <tr>
 <td width="159">
-<font color="#FF0000"><? echo "目前共有".$count."条记录"?></font>
+<font color="#FF0000"><?php echo "目前共有".$count."条记录"?></font>
 </td>
-<td width="205"><? echo "共".$pages."页"; ?></td>
+<td width="205"><?php echo "共".$pages."页"; ?></td>
 
 <?php
   $first = 1;
