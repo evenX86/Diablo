@@ -6,7 +6,7 @@
 </head>
 
 <body>
-<table align="center" width="860" cellspacing="6" class="title" bgcolor="#e3f3ff">
+<table align="center" width="970" cellspacing="6" class="title" bgcolor="#e3f3ff">
 <tr>
 <td align="center">
 浙江树人大学工作室版权所有

@@ -1,5 +1,6 @@
 <?php
 //学生功能
+header("Content-type: text/html; charset=utf-8");
 include("connect.php");
 include("sys_header.php");
 include("student_test.php");
@@ -50,28 +51,10 @@ include("student_test.php");
 
     <?php
     $n = 1;
-    $sql = "select count(*) as num from $Subject where audit='通过'";
-    $query = $DB->prepare($sql);
-    $result = $query->execute();
-    $row = count($result);
-
-    if (empty($offset)) {
-        $offset = 0;
-    }//if
-
-    $pages = ceil($count / $PAGE_NUM);
-    if (isset($_GET['page'])) {
-        $page = intval($_GET['page']);
-    }//if
-    else {
-        $page = 1;
-    }
-
-    $offset = $PAGE_NUM * ($page - 1);
-    $sql = "select * from $Subject where audit='通过' order by teacher_ID desc";
-    $n =1;
-    foreach ($DB->query($sql) as $row) {
-    //    print_r($row); //你可以用 echo($GLOBAL); 来看到这些值
+    $sql = "select * from $Subject WHERE audit='通过' order by teacher_ID desc";
+    $result = $DB->query($sql);
+    $result = $result->fetchAll();
+    foreach ($result as $row) {
     if (($n % 2) != 0)
     {
     ?>
@@ -150,7 +133,6 @@ include("student_test.php");
             $n++;
         }//if
         else {
-            echo "???";
         }
         }//while
         ?>
@@ -260,13 +242,13 @@ if ($count != 0)
     $sql = "select teacher_name from $Teacher where teacher_ID='$teacher_ID'";
     $query = $DB->query($sql);
     $row_two = $query->fetchAll();
-    $row_two =$row_two[0];
+    $row_two = $row_two[0];
 
     $student_ID = $row_one['student_ID'];
     $sql = "select student_name from $Student where student_ID='$student_ID'";
     $query = $DB->query($sql);
     $row_three = $query->fetchAll();
-    $row_three =$row_three[0];
+    $row_three = $row_three[0];
     ?>
     <tr bgcolor="#FFFFFF" class="text">
         <td width="3%" align="center"><?php echo "" . $row_one['subject_ID'] . "";?></td>

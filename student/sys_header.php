@@ -30,8 +30,10 @@ function show(menuName)
 
 <body>
 <div style="text-align:center">
-<img src="images/head.jpg" alt="系统图标" />
+<img src="images/head.jpg" alt="系统图标"  />
 </div>
+
+<div>
 
 <div id="menu3" onmouseover="show('menu3');" onmouseout="hide('menu3');">
 <div class="menuHead"><a href="system.php">系统首页</a></div>
@@ -65,7 +67,7 @@ function show(menuName)
 <div id="menu7" class="menu" onmouseover="show('menu7');" onmouseout="hide('menu7');">
 <div class="menuHead"><a href="student_clear_cookie.php">退出登录</a></div>
 </div>
-
+</div>
 <script type="text/javascript">
 <!--
 if(DOMCapable)
@@ -77,7 +79,7 @@ if(DOMCapable)
 </script>
 
 <br>
-<hr style="BORDER-BOTTOM-STYLE:dotted;BORDER-LEFT-STYLE:dotted; BORDER-BIGHT-STYLE:dotted; BORDER-TOP-STYLE:dotted" size="5" width="860" color="#40cf79">
+<hr style="BORDER-BOTTOM-STYLE:dotted;BORDER-LEFT-STYLE:dotted; BORDER-BIGHT-STYLE:dotted; BORDER-TOP-STYLE:dotted" size="5" width="970" color="#40cf79">
 </body>
 </html>
 <br>
