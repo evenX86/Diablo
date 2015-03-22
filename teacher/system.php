@@ -44,9 +44,9 @@ include("teacher_test.php");
     <?php
     $n = 1;
     $teacher_ID = $_COOKIE['cookie_user_ID'];
-    $sql = "select count(*) as num from $Subject where teacher_ID='$teacher_ID'";
-    $query = $DB->query($sql) or die ("连接错误！!!!!!!!!!!!!!!!!!");
-    $row = $query->fetchAll()[0];
+    $sql = "select *   from $Subject where teacher_ID='$teacher_ID'";
+    $query = $DB->query($sql);
+    $row = $query->fetchAll();
     $count = count($row);
 
     if (empty($offset)) {
