@@ -2,7 +2,7 @@
 
 .text{font-family:"宋体"; font-size:12pt; font-weight:bold; line-height:20px; color:#000000; text-decoration:none}
 
-//.form{font-family:"宋体" color:#dbeefd; text-decoration:none}
+.form{font-family:"宋体" color:#dbeefd; text-decoration:none}
 
 li{list-style-type:none;}
 
@@ -11,3 +11,14 @@ a:link {font-family:"宋体"; font-size:9pt; font-style:normal; color:#000000; t
 a:hover {font-family:"宋体"; font-size:9pt; color:#FF0000; text-decoration:none}
 
 a:visited {font-family:"宋体"; font-size:9pt; color:#000000; text-decoration:none}
+
+
+
+.copy-footer {
+    clear: both;
+
+    margin-top: 80px;
+    padding: 20px 0;
+    color: #999;
+    text-align: center;
+}

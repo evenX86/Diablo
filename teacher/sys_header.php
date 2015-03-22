@@ -3,7 +3,12 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <link href="style.css" rel="stylesheet" type="text/css">
 <title>浙江树人大学毕业设计管理系统</title>
-
+  <link href="../style.css" rel="stylesheet" type="text/css">
+  <title>浙江树人大学毕业设计管理系统</title>
+  <link href="../resources/css/bootstrap-theme.css">
+  <link href="../resources/css/bootstrap.css">
+  <script type="text/javascript" src="../resources/js/jquery.min.js"></script>
+  <script type="text/javascript" src="../resources/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 <!--
 (document.getElementById ? DOMCapable = true: COMCapable = false);
@@ -12,7 +17,12 @@ function hide(menuName)
   if(DOMCapable)
   {//仅对DOM浏览器隐藏菜单
     var theMenu = document.getElementById(menuName+"choices");
-    theMenu.style.visibility = 'hidden';
+    try{
+      theMenu.style.visibility = 'hidden';
+    } catch (e){
+
+    }
+
   }//if
 }//hide
 
@@ -78,14 +88,17 @@ function show(menuName)
 <!--
 if(DOMCapable)
 {
-  hide(menu2);
-  hide(menu4);
+  hide('menu2');
+  hide('menu3');
+  hide('menu4');
+  hide('menu5');
+  hide('menu6');
 }//if
 //-->
 </script>
 
 <br>
-<hr style="BORDER-BOTTOM-STYLE:dotted;BORDER-LEFT-STYLE:dotted; BORDER-BIGHT-STYLE:dotted; BORDER-TOP-STYLE:dotted" size="5" width="860" color="#40cf79">
+<hr style="BORDER-BOTTOM-STYLE:dotted;BORDER-LEFT-STYLE:dotted; BORDER-BIGHT-STYLE:dotted; BORDER-TOP-STYLE:dotted" size="5" width="970" color="#40cf79">
 </body>
 </html>
 <br>

@@ -29,9 +29,9 @@ if($Button == "登录")
 
   if($RadioButton == '学生')
   {
-    $sql = "select * from $User where user_ID= '$user_ID' and user_passwd= '$user_passwd'";
-    $query = $DB->query($sql) or die (mysql_error());
-    $num = count($query);
+    $sql = "select * from $User where user_ID= '$user_ID' and user_passwd= '$user_passwd' AND degree='学生'";
+    $query = $DB->query($sql);
+    $num = count($query->fetchAll());
     if( $num != 0)
     {
       $expire = 60*60*24*1 +time();
@@ -54,18 +54,20 @@ if($Button == "登录")
 
   if($RadioButton == '教师')
   {
-    $sql = "select * from $User where user_ID='$user_ID' and user_passwd='$user_passwd'";
-    $query = mysql_query($sql) or die (mysql_error());;
-    $num = mysql_num_rows($query);
-    if( $num != 0)
+    $sql = "select * from $User where user_ID='$user_ID' and user_passwd='$user_passwd' AND degree='教师'";
+    $query = $DB->query($sql);
+    $num =$query->fetchAll();
+    if( count($num) != 0)
     {
       $expire = 60*60*24*1 +time();
       setcookie("cookie_user_passwd","$user_passwd",$expire,"/");
       setcookie("cookie_user_ID","$user_ID",$expire,"/");
       $sql = "select Teacher_name from $Teacher where Teacher_ID='$user_ID'";
-      $query = mysql_query($sql);
-      $row = mysql_fetch_array($query);
+      $query = $DB->query($sql);
+      $row = $query->fetchAll()[0];
       $Teacher_name = $row['Teacher_name'];
+      setcookie("cookie_user_Name","$Teacher_name",$expire,"/");
+
       echo"<p align=\"center\"><b><big>$Teacher_name 教师登录成功！</big></b></p>";
       echo"<html><meta http-equiv=\"refresh\" content=\"0; url=teacher/system.php\"></html>";
     }//if
@@ -79,16 +81,16 @@ if($Button == "登录")
   if($RadioButton == '管理员')
   {
     $sql = "select * from $Admin where Admin_ID='$user_ID' and Admin_passwd='$user_passwd'";
-    $query = mysql_query($sql) or die (mysql_error());;
-    $num = mysql_num_rows($query);
+    $query = $DB->query($sql) or die (mysql_error());;
+    $num = $query->rowCount();
     if( $num != 0)
     {
       $expire = 60*60*24*1 +time();
       setcookie("cookie_user_passwd","$user_passwd",$expire,"/");
       setcookie("cookie_user_ID","$user_ID",$expire,"/");
       $sql = "select Teacher_name from $Teacher where Teacher_ID='$user_ID'";
-      $query = mysql_query($sql);
-      $row = mysql_fetch_array($query);
+      $query = $DB->query($sql);
+      $row = $query->rowCount();
       $Admin_name = $row['Teacher_name'];
       echo"<p align=\"center\"><b><big>$Admin_name 管理员登录成功！</big></b></p>";
       echo"<html><meta http-equiv=\"refresh\" content=\"0; url=admin/system.php\"></html>";

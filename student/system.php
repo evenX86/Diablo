@@ -5,12 +5,6 @@ include("connect.php");
 include("sys_header.php");
 include("student_test.php");
 ?>
-<html>
-<head>
-    <title>浙江树人大学毕业设计管理系统</title>
-    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
-    <link rel="stylesheet" href="style.css" type="text/css">
-</head>
 
 <body bgcolor="#e3f3ff">
 <table width="860" border="1" cellspacing="0" cellpadding="0" align="center">

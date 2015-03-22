@@ -10,7 +10,8 @@ $DBname = "gmsdb";
 $DBuser = "root";
 $DBpassword = "123456";
 $DB = new PDO("mysql:host=localhost;dbname=$DBname",$DBuser,$DBpassword);
-
+$query = $DB->prepare("set names utf8");
+$query->execute();
 $User = "user";
 $Student = "student";
 $Teacher = "teacher";
