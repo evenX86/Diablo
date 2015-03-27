@@ -1,19 +1,37 @@
 {{include('header.html')}}
+<style>
+    .nav ul {
+        list-style: none;
+    }
+
+    .nav li {
+        float: left;
+    }
+</style>
 <body bgcolor="#e3f3ff">
-<div style="text-align:center"><img src="assets/img/head.jpg" alt="系统图标"/></div>
+<div class="container"><img src="assets/img/head.jpg" alt="系统图标"/></div>
+<div class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-collapse collapse" role="navigation">
+            <ul class="nav navbar-nav">
+                <li class=""><a href="/" target="_blank">系统首页</a></li>
+                <li class=""><a href="/register" target="_blank">用户注册</a></li>
+                <li class=""><a href="/help" target="_blank">帮助信息</a></li>
+                <li class=""><a href="/contact" target="_blank">联系反馈</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
 
-<table width=970 align="center" bgcolor="#e3f3ff">
-    <tr>
-        <td align="right" class="title" width="64%"><a href="index.php">系统首页</a></td>
-        <td align="right" class="title" width="12%"><a href="register.php">用户注册</a></td>
-        <td align="right" class="title" width="12%"><a href="help.php">帮助信息</a></td>
-        <td align="right" class="title" width="12%"><a href="contact.php">联系反馈</a></td>
-    </tr>
-</table>
+<hr size="5" width="970" color="#40cf79">
 
-<hr style="border-style: dotted;" size="5" width="970" color="#40cf79">
+<div>
+    <form id="myform" method="post" action="/login">
 
-<table height="400" width="970" align="center" bgcolor="#E3F3FF">
+    </form>
+</div>
+
+<table>
     <tr height="10">
     </tr>
 
@@ -21,7 +39,7 @@
         <td width="10">
         </td>
         <td height="342" width="290" align="left" style="background-image:url(assets/img/login.jpg)">
-            <form id="myform" method="post" action="login.php">
+            <form id="myform1" method="post" action="/login">
                 <ul>
                     <li>
                         <label><font color="#dbeefd">用户名:</font></label><input style="height:25px" size="10"
