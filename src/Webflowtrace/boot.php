@@ -64,6 +64,10 @@ if (! headers_sent()) {
 $app->mount('', new \Webflowtrace\Controller\AdminController());
 $app->mount('', new \Webflowtrace\Controller\ContentController());
 $app->mount('', new \Webflowtrace\Controller\RouteController());
+$app->mount('', new \Webflowtrace\Controller\StudentController());
+$app->mount('', new \Webflowtrace\Controller\TeacherController());
+$app->mount('', new \Webflowtrace\Controller\MainController());
+$app->mount('', new \Webflowtrace\Controller\UserController());
 
 //$app['session.storage.handler'] = null;
 return $app;

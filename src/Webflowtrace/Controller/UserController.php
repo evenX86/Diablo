@@ -30,12 +30,14 @@ class UserController implements ControllerProviderInterface{
         // TODO: Implement connect() method.
         $route = $app['controllers_factory'];
         $config = new configuration();
-        /*
+        /**
          *  用户权限验证
          */
         $route->before(
             function (Request $request) use ($app, $config) {
-
+                if (null === $user = $app['session']->get('user')) {
+                    return $app->redirect('/login');
+                }
             });
         return $route;
     }

@@ -26,11 +26,6 @@ class RouteController implements ControllerProviderInterface {
          */
         $route->before(
             function (Request $request) use ($app, $config) {
-                if (null === $user = $app[ 'session' ] ->get('user' )) {
-                    return $app->redirect('/login' );
-                } else {
-                    $this->user= $app[ 'session' ] ->get('user' );
-                }
             });
 
         /* type view
@@ -45,9 +40,11 @@ class RouteController implements ControllerProviderInterface {
          * */
         $route->get(
             "/register", function () use ($app, $config) {
+
+            $user = $app[ 'session' ] ->get('user' );
             return $app['twig']->render(
                 '/register.html',
-                ['config' => $config]);
+                ['config' => $config,'name'=>$user['username']]);
         });
         /* type view
          * */

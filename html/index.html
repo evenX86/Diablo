@@ -1,6 +1,20 @@
-{{include('header.html')}}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>{{ config.title}}</title>
+    <base href="{{config.baseurl}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{config.title}},浙江树人大学, 毕业设计管理系统, SF">
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+    {{include('basecss.html')}}
+    {{include('basescript.html')}}
+</head>
 <body>
-<div class="container" style="width: 100%;padding: 0"><img src="assets/img/head.jpg" style="width: 100%;margin: 0"/></div>
+
+
+<div class="container" style="width: 100%;padding: 0"><img src="assets/img/head.jpg" style="width: 100%;margin: 0"/>
+</div>
 <div class="navbar navbar-inverse">
     <div class="container">
         <div class="navbar-collapse collapse" role="navigation">
@@ -9,12 +23,105 @@
                 <li class=""><a href="/register" target="_blank">用户注册</a></li>
                 <li class=""><a href="/help" target="_blank">帮助信息</a></li>
                 <li class=""><a href="/contact" target="_blank">联系反馈</a></li>
+                {% if name %}
+                <li class="" style="position: absolute;right: 0">
+                    <a href="/dashboard" target="_blank" style="float: left">{{name}}</a>
+                    <a href="/logout" target="_blank" style="float: left">注销</a></li>
+                {% endif %}
             </ul>
         </div>
-    </div>
-</div>
-Hello {{name}}
 
-</body>
+    </div>
+
+</div>
+
+<div class="container">
+
+    <div class="row row-offcanvas row-offcanvas-right">
+
+        <div class="col-xs-12 col-sm-9">
+            <p class="pull-right visible-xs">
+                <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+            </p>
+            <div class="jumbotron">
+                <h1>新闻动态</h1>
+
+                <p></p>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-lg-4">
+                    <h2>关于做好2015届本科生毕业设计（论文）工作的通知</h2>
+
+                    <p>各学院（系）：
+                        毕业设计（论文）是本科教学培养计划中重要的实践教学环节，是实现教学、科研与社会实践相结合的重要结合点，</p>
+
+                    <p><a class="btn btn-default" href="#" role="button">全文 &raquo;</a></p>
+                </div>
+                <!--/.col-xs-6.col-lg-4-->
+                <div class="col-xs-6 col-lg-4">
+                    <h2>树大2014届优异学士学位论文揭晓</h2>
+
+                    <p>2014届优异学士学位论文（TOP1%）近日揭晓。经院（系）严格遴选推荐及学校统一答辩评选，共有来自全校19个院（系）</p>
+
+                    <p><a class="btn btn-default" href="#" role="button">全文 &raquo;</a></p>
+                </div>
+                <!--/.col-xs-6.col-lg-4-->
+                <div class="col-xs-6 col-lg-4">
+                    <h2>2014届树大优异学士学位论文评选结果公示</h2>
+
+                    <p>2014届树大优异学士学位论文（TOP 1%）于6月25日通过学校答辩评选揭晓，现予公示（见附表，排名不分先后）。如有异议，请于7月4日之前提出。</p>
+
+                    <p><a class="btn btn-default" href="#" role="button">全文 &raquo;</a></p>
+                </div>
+                <!--/.col-xs-6.col-lg-4-->
+                <div class="col-xs-6 col-lg-4">
+                    <h2>关于2014届“树大优异学士学位论文”评选的通知</h2>
+
+                    <p> 毕业设计（论文）是本科教学培养计划中重要的实践教学环节，对提高学生的实践能力、创新能力和综合素质具有十分重要的作用。</p>
+
+                    <p><a class="btn btn-default" href="#" role="button">全文 &raquo;</a></p>
+                </div>
+                <!--/.col-xs-6.col-lg-4-->
+                <div class="col-xs-6 col-lg-4">
+                    <h2>树大关于公布2012特色实验建设项目名单的通知</h2>
+
+                    <p>根据《关于申报2012年树大特色实验项目的通知》精神，经学院(系)申报及预审、专家评审和学校审核，确定以下66个项目为2012年上海交通大学特色实验建设项目，现予公布（排序不分先后）： <</p>
+
+                    <p><a class="btn btn-default" href="#" role="button">全文 &raquo;</a></p>
+                </div>
+                <!--/.col-xs-6.col-lg-4-->
+                <div class="col-xs-6 col-lg-4">
+                    <h2>树大关于公布2012特色实验建设项目名单的通知</h2>
+
+                    <p>根据《关于申报2012年树大特色实验项目的通知》精神，经学院(系)申报及预审、专家评审和学校审核，确定以下66个项目为2012年上海交通大学特色实验建设项目，现予公布（排序不分先后）： </p>
+
+                    <p><a class="btn btn-default" href="#" role="button">全文 &raquo;</a></p>
+                </div>
+                <!--/.col-xs-6.col-lg-4-->
+            </div>
+            <!--/row-->
+        </div>
+        <!--/.col-xs-12.col-sm-9-->
+
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+            <h2>表格下载</h2>
+            <ul class="list-group">
+                <li style="text-align: inherit"><a href="/" class="list-group-item">毕业论文模版  </a><p style="margin-left:180px">2014-03-22</p></li>
+                <li><a href="/" class="list-group-item">毕业论文模版1  </a><p style="margin-left:180px">2014-03-22</p></li>
+                <li><a href="/" class="list-group-item">毕业论文模版2 </a><p style="margin-left:180px">2014-03-22</p></li>
+                <li><a href="/" class="list-group-item">毕业论文模版3  </a><p style="margin-left:180px">2014-03-22</p></li>
+                <li><a href="/" class="list-group-item">毕业论文模版4  </a><p style="margin-left:180px">2014-03-22</p></li>
+            </ul>
+        </div>
+        <!--/.sidebar-offcanvas-->
+    </div>
+    <!--/row-->
+
+    <hr>
+
+</div>
+<!--/.container-->
+
+
 {{include('footer.html')}}
 

@@ -10,3 +10,23 @@
     {{include('basecss.html')}}
     {{include('basescript.html')}}
 </head>
+<body>
+<div class="container" style="width: 100%;padding: 0"><img src="assets/img/head.jpg" style="width: 100%;margin: 0"/>
+</div>
+<div class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-collapse collapse" role="navigation">
+            <ul class="nav navbar-nav">
+                <li class=""><a href="/" target="_blank">系统首页</a></li>
+                <li class=""><a href="/register" target="_blank">用户注册</a></li>
+                <li class=""><a href="/help" target="_blank">帮助信息</a></li>
+                <li class=""><a href="/contact" target="_blank">联系反馈</a></li>
+                {% if name %}
+                <li class="" style="position: absolute;right: 0">
+                    <a href="/dashboard" target="_blank" style="float: left">{{name}}</a>
+                    <a href="/logout" target="_blank" style="float: left">注销</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>

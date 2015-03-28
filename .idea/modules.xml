@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/webflowtrace.iml" filepath="$PROJECT_DIR$/.idea/webflowtrace.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Diablo.iml" filepath="$PROJECT_DIR$/.idea/Diablo.iml" />
     </modules>
   </component>
 </project>
-
