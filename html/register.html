@@ -1,24 +1,105 @@
 {{include('header.html')}}
+<style>
+    .readme li{
+        margin-top: 10px;
+    }
+</style>
 <div class="container">
     <div style="float: left;width: 40%" >
-        <form class="form-signin" action="/account" method="post">
-            <h2 class="form-signin-heading">登录</h2>
-            <label for="inputEmail" class="sr-only">Email address</label>
-            <input type="text" id="inputEmail" class="form-control" placeholder="Username" name="username" required autofocus>
-            <label for="inputPassword" class="sr-only">Password</label>
-            <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required>
-            <select class="form-control" name="type">
-                <option value="student">学生</option>
-                <option value="teacher">教师</option>
-                <option value="admin">管理员</option>
-            </select>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" value="remember-me"> Remember me
-                </label>
+        <form action="/regist-user" method="post" onsubmit="return checkForm();">
+            <div class="form-group">
+                <label for="InputEmail1">用户名</label>
+                <input type="text" class="form-control" id="InputEmail1" placeholder="Username" name="username">
             </div>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+
+            <div class="form-group">
+                <label for="InputPassword">密码</label>
+                <input type="password" class="form-control" id="InputPassword" placeholder="Password" name="passwd">
+            </div>
+
+            <div class="form-group">
+                <label for="InputPassword1">密码确认</label>  <label style="color: red" id="AlarmPasswd" hidden="true">两次输入的密码不相同</label>
+                <input type="password" class="form-control" id="InputPassword1" placeholder="Password Again" name="passwdAgain" onblur="checkPassword()">
+
+
+            </div>
+
+            <div class="form-group">
+                <label for="InputEmail">邮箱</label>
+                <input type="email" class="form-control" id="InputEmail" placeholder="Email" name="email">
+            </div>
+
+            <div class="form-group">
+                <label for="InputPhone">手机</label>
+                <input type="text" class="form-control" id="InputPhone" placeholder="Number" name="phone">
+            </div>
+
+            <div class="form-group">
+                <label for="InputCollege">学院</label>
+                <input type="text" class="form-control" id="InputCollege" placeholder="College" name="college">
+            </div>
+
+            <div class="form-group">
+                <label for="InputMajor">专业</label>
+                <input type="text" class="form-control" id="InputMajor" placeholder="Major" name="major">
+            </div>
+
+            <div class="form-group">
+                <label for="InputAddr">住址</label>
+                <input type="text" class="form-control" id="InputAddr" placeholder="Address" name="address">
+            </div>
+
+            <div class="form-group">
+                <label for="InputSex">性别</label>
+                <select class="form-control" name="type" id="InputSex">
+                    <option value="男">男</option>
+                    <option value="女">女</option>
+                </select>
+            </div>
+
+            <!-- 用户类型只能选择学生或者教师-->
+            <div class="form-group">
+                <label for="InputType">用户类型</label>
+                <select class="form-control" name="type" id="InputType">
+                    <option value="student">学生</option>
+                    <option value="teacher">教师</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-default">Submit</button>
         </form>
+
+    </div>
+    <div style="float: left;margin-left: 50px">
+        <div>
+            <img src="assets/img/cg.gif" style="margin-left: 20px">
+            <font color="red">注册须知</font>
+        </div>
+        <ol class="readme">
+            <li>本网站只对本校师生开放！</li>
+            <li>本站详细内容须登陆后方可查阅，未登陆用户只能查看首页的相关内容！</li>
+            <li>本校师生可在特定的开放时间内注册，经管理员验证后方可进行登陆使用！</li>
+            <li>本校的师生注册时，用户名请使用自己的编号或学号！</li>
+            <li>如若忘记密码请到教务处查询！</li>
+        </ol>
     </div>
 </div>
+<script>
+    function checkForm() {
+        var flag = checkPassword();
+        if(!flag) {
+            alert("表单输入有误,请检查表单后再提交");
+        }
+        return flag;
+    }
+    function checkPassword() {
+        var passwd = $("input[name='passwd']").val();
+        var passwd2 = $("input[name='passwdAgain']").val();
+        if (passwd!=passwd2) {
+            $("#AlarmPasswd").attr("hidden",false);
+            return false;
+        }
+        return true;
+    }
+</script>
 {{include('footer.html')}}

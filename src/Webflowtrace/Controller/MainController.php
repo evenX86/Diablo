@@ -87,6 +87,30 @@ QUERY;
         });
 
         /**
+         * 处理登录页
+         */
+        $route->post(
+            "/regist-user",function(Request $request) use($app,$config) {
+            $username = $request->get("username");
+            $passwd = $request->get("password");
+            $type = $request->get("type");
+            $md5passwd = md5($passwd);
+            $flag = $app['db']->insert('shenfei_user',
+                [
+                'user_name'=>$username,
+                'user_passwd'=>$md5passwd,
+                'degree'=>$type
+                ]);
+            if ($flag) {
+                //验证成功,跳转
+                $app[ 'session' ] ->set('user',array('username' => $username));
+                return $app->redirect('/');
+            } else {
+                return new Response("注册失败",200);
+            }
+        });
+
+        /**
          * 退出登录页
          * */
         $route->get(
