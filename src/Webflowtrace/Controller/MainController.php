@@ -85,6 +85,15 @@ QUERY;
                 return new Response("登录失败",200);
             }
         });
+
+        /**
+         * 退出登录页
+         * */
+        $route->get(
+            "/logout", function () use ($app, $config) {
+            $app[ 'session' ] ->set('user',null);
+            return $app->redirect('/');
+        });
         return $route;
     }
 }
