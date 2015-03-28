@@ -1,15 +1,23 @@
 <?php
-namespace Webflowtrace\Controller;
+/**
+ * Created by PhpStorm.
+ * User: xuyifei01
+ * Date: 2015/3/28
+ * Time: 10:16
+ */
 
+namespace Webflowtrace\Controller;
+use Doctrine\Common\Annotations\Reader;
 use Silex\Application;
 use Silex\ControllerCollection;
 use Silex\ControllerProviderInterface;
+use Symfony\Component\Config\Definition\Exception\Exception;
+use Webflowtrace\configuration;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Webflowtrace\configuration;
 
-class ContentController implements ControllerProviderInterface
-{
+class UserController implements ControllerProviderInterface{
+
     /**
      * Returns routes to connect to the given application.
      *
@@ -19,6 +27,7 @@ class ContentController implements ControllerProviderInterface
      */
     public function connect(Application $app)
     {
+        // TODO: Implement connect() method.
         $route = $app['controllers_factory'];
         $config = new configuration();
         /*

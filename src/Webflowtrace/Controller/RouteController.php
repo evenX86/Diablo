@@ -15,16 +15,22 @@ use Symfony\Component\HttpFoundation\Response;
 use Webflowtrace\configuration;
 
 class RouteController implements ControllerProviderInterface {
+    private  $user = [];
     public function connect(Application $app)
     {
         $route = $app['controllers_factory'];
         $config = new configuration();
+
         /*
          *  用户权限验证
          */
         $route->before(
             function (Request $request) use ($app, $config) {
-
+                if (null === $user = $app[ 'session' ] ->get('user' )) {
+                    return $app->redirect('/login' );
+                } else {
+                    $this->user= $app[ 'session' ] ->get('user' );
+                }
             });
 
         /* type view
@@ -60,6 +66,17 @@ class RouteController implements ControllerProviderInterface {
                 ['config' => $config]);
         });
 
+        /**
+         * dashboard
+         */
+        $route->get("/dashboard",function() use ($app,$config){
+            if (null === $user = $app[ 'session' ] ->get('user' )) {
+                return $app->redirect('/login' );
+            }
+            return $app['twig']->render(
+                '/admin/dashboard.html',
+                ['config' => $config,'name'=>$user['username']]);
+        });
         return $route;
     }
 }

@@ -12,8 +12,6 @@ use Doctrine\Common\Annotations\Reader;
 use Silex\Application;
 use Silex\ControllerProviderInterface;
 use Symfony\Component\Config\Definition\Exception\Exception;
-use Webflowtrace\Util\RedisHelper;
-use Webflowtrace\Util\UAM;
 use Webflowtrace\configuration;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
