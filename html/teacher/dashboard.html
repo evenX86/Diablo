@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>{{ config.title}}</title>
+    <base href="{{config.baseurl}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{config.title}},浙江树人大学, 毕业设计管理系统, SF">
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+    {{include('basecss.html')}}
+    <link href="assets/css/dashboard.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/signin.css">
+    {{include('basescript.html')}}
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">树大毕设过程管理系统</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class=""><a href="/" target="_blank">系统首页</a></li>
+                <li class=""><a href="/register" target="_blank">用户注册</a></li>
+                <li class=""><a href="/help" target="_blank">帮助信息</a></li>
+                <li class=""><a href="/contact" target="_blank">联系反馈</a></li>
+                {% if name %}
+                <li class="" style="float: right;">
+                    欢迎{{name}}<a href="/logout" target="_blank" style="float: left">注销</a></li>
+                {% endif %}
+            </ul>
+            <form class="navbar-form navbar-right">
+                <input type="text" class="form-control" placeholder="Search...">
+            </form>
+        </div>
+    </div>
+</nav>
+<!-- 指导教师-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li class="active"><a href="/dashboard">概览 <span class="sr-only">(current)</span></a></li>
+                <li><a href="/dashboard">课题申报</a></li>
+                <li><a href="/teacher/apply">课题确认</a></li>
+                <li><a href="">学生选题确认</a></li>
+                <li><a href="">学生课题申请表填写</a></li>
+                <li><a href="">学生任务书填写</a></li>
+                <li><a href="">开题报告审核</a></li>
+                <li><a href="">中期1进度审核</a></li>
+                <li><a href="">中期2进度审核</a></li>
+                <li><a href="">实习意见填写</a></li>
+                <li><a href="">实习单位意见填写</a></li>
+                <li><a href="">学生进程安排审核</a></li>
+                <li><a href="">消息</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">当前流程进度</h1>
+
+            <div class="row placeholders">
+                <div class="col-xs-6 col-sm-3 placeholder">
+                    <img data-src="holder.js/200x200/auto/sky" class="img-responsive"
+                         alt="Generic placeholder thumbnail">
+                    <h4>Label</h4>
+                    <span class="text-muted">Something else</span>
+                </div>
+                <div class="col-xs-6 col-sm-3 placeholder">
+                    <img data-src="holder.js/200x200/auto/vine" class="img-responsive"
+                         alt="Generic placeholder thumbnail">
+                    <h4>Label</h4>
+                    <span class="text-muted">Something else</span>
+                </div>
+                <div class="col-xs-6 col-sm-3 placeholder">
+                    <img data-src="holder.js/200x200/auto/sky" class="img-responsive"
+                         alt="Generic placeholder thumbnail">
+                    <h4>Label</h4>
+                    <span class="text-muted">Something else</span>
+                </div>
+                <div class="col-xs-6 col-sm-3 placeholder">
+                    <img data-src="holder.js/200x200/auto/vine" class="img-responsive"
+                         alt="Generic placeholder thumbnail">
+                    <h4>Label</h4>
+                    <span class="text-muted">Something else</span>
+                </div>
+            </div>
+
+            <h2 class="sub-header">学生毕业设计信息</h2>
+
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>学号</th>
+                        <th>姓名</th>
+                        <th>课题名称</th>
+                        <th>进度</th>
+                        <th>是否需要操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>20105641030</td>
+                        <td>沈菲</td>
+                        <td>基于web的毕业设计过程管理系统</td>
+                        <td>开题报告已审核完成</td>
+                        <td>已可以审核中期1进度</td>
+
+                    </tr>
+                    <tr>
+                        <td>20105641023</td>
+                        <td>陶加恩</td>
+                        <td>IM</td>
+                        <td>开题报告已审核完成</td>
+                        <td>审核中期1进度进行中</td>
+                    </tr>
+                    <tr>
+                        <td>20105641023</td>
+                        <td>法克尤</td>
+                        <td>不科学的电磁炮</td>
+                        <td>中期1检查已审核完成</td>
+                        <td>审核中期2进度进行中</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+<script src="assets/js/holder.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+
+{{include('footer.html')}}
