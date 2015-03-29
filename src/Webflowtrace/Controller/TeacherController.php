@@ -36,8 +36,12 @@ class TeacherController implements ControllerProviderInterface{
          */
         $route->before(
             function (Request $request) use ($app, $config) {
-                if (null === $user = $app['session']->get('user')) {
+                $user = $app['session']->get('user');
+                if (null === $user) {
                     return $app->redirect('/login');
+                }
+                if ($user['type'] != "teacher") {
+                    return $app->redirect('/');
                 }
             });
         /**
@@ -48,7 +52,7 @@ class TeacherController implements ControllerProviderInterface{
             $user = $app[ 'session' ] ->get('user' );
             return $app['twig']->render(
                 '/teacher/apply.html',
-                ['config' => $config,'name'=>$user['username']]);
+                ['config' => $config,'user'=>$user]);
         });
         /**
          * 处理课题申报的控制器
@@ -80,6 +84,12 @@ class TeacherController implements ControllerProviderInterface{
          */
         $route->get("/restful/subject-list",function()use ($app,$config){
             $user = $app['session']->get('user');
+            $query = <<<QUERY
+                select * from shenfei_subject where teacher_id=?
+QUERY;
+            $result = $app['db']->fetchAll($query,[$user['id']]);
+            return $app->json($result);
+
 
         });
         return $route;

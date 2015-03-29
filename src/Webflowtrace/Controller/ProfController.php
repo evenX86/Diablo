@@ -34,8 +34,12 @@ class ProfController implements ControllerProviderInterface
          */
         $route->before(
             function (Request $request) use ($app, $config) {
-                if (null === $user = $app['session']->get('user')) {
+                $user = $app['session']->get('user');
+                if (null === $user) {
                     return $app->redirect('/login');
+                }
+                if ("prof"!=$user['type']) {
+                    return $app->redirect('/');
                 }
             });
 
@@ -51,6 +55,26 @@ class ProfController implements ControllerProviderInterface
 QUERY;
             $result = $app['db']->fetchAll($query);
             return $app->json($result);
+        });
+
+        $route->post("/prof/subject-audit-deal", function (Request $request) use ($app, $config) {
+            $subjectTitle = $request->get("subject-title");
+            $teacherID = $request->get("subject-teacherid");
+            $agree = $request->get("agree");
+            $comment = $request->get("audit-comment");
+            $date =  date('Y-m-d', time());
+            $sql1 = "update shenfei_subject set prof_audit = ? where subject_title = ? and teacher_id = ?";
+            $sql2 = "update shenfei_subject set update_time = ?  where subject_title = ? and teacher_id = ?";
+            $sql3 = "update shenfei_subject set prof_comment = ? where subject_title = ? and teacher_id = ?";
+            $flag = $app['db']->executeUpdate($sql1,array($agree,$subjectTitle,$teacherID));
+            $flag = $app['db']->executeUpdate($sql2,array($date,$subjectTitle,$teacherID));
+            $flag = $app['db']->executeUpdate($sql3,array($comment,$subjectTitle,$teacherID));
+            if ($flag) {
+                return $app->redirect("/prof/audit-subject");
+            } else {
+                return new Response("操作失败",200);
+            }
+
 
         });
         return $route;

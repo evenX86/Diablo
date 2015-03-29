@@ -21,8 +21,9 @@
                     <thead>
                     <tr>
                         <th>课题编号</th>
+                        <th>课题名称</th>
                         <th>申报教师(ID)</th>
-                        <th>是否通过</th>
+                        <th>审核状态</th>
                         <th>审核意见</th>
                         <th>操作</th>
                     </tr>
@@ -50,31 +51,37 @@
             <div class="modal-body" id="subject-audit-modal">
                 <form action="/prof/subject-audit-deal" method="post">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">课题标题</label>
-                        <input name="subject-title" type="text" class="form-control" id="exampleInputEmail1" value="IM" readonly>
+                        <label for="subject-title-modal">课题标题</label>
+                        <input name="subject-title" type="text" class="form-control" id="subject-title-modal" readonly>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">申报教师</label>
-                        <input name="subject-content" type="text" class="form-control" id="exampleInputPassword1" value="钟锋" readonly>
+                        <label for="subject-teacher-modal">申报教师</label>
+                        <input name="subject-teacher" type="text" class="form-control" id="subject-teacher-modal" value="钟锋" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject-teacherid-modal">申报教师ID</label>
+                        <input name="subject-teacherid" type="text" class="form-control" id="subject-teacherid-modal" value="钟锋" readonly>
                     </div>
 
                     <div class="form-group">
                         <label for="exampleInput2">是否同意</label>
-                        <select class="form-control" name="type" id="exampleInput2">
+                        <select class="form-control" name="agree" id="exampleInput2">
                             <option value="true">同意</option>
                             <option value="false">不同意</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="exampleInput3">审核意见</label>
-                        <textarea id="exampleInput3" name="audit-comment" type="text" class="form-control" ></textarea>
+                        <textarea id="exampleInput3" name="audit-comment" type="text" class="form-control"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="submit" class="btn btn-primary">确定修改</button>
                     </div>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary">确定修改</button>
-            </div>
+
         </div>
     </div>
 </div>
