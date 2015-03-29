@@ -33,7 +33,7 @@
                 <li class=""><a href="/contact" target="_blank">联系反馈</a></li>
                 {% if user %}
                 <li>
-                    <a style="float: left;cursor: pointer">欢迎{{user.username}},你的角色是{{user.type}}</a></li>
+                <a style="float: left;cursor: pointer">欢迎{{user.username}},你的角色是{{user.type}}</a></li>
                 </li>
                 <li class="">
                    <a href="/logout" target="_blank" style="float: left">注销</a></li>
@@ -95,6 +95,27 @@
                 </div>
             </div>
 
+
+            <h2 class="sub-header">课题申报信息</h2>
+
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>课题编号</th>
+                        <th>课题名称</th>
+                        <th>专业负责人审核</th>
+                        <th>学院负责人审核</th>
+                        <th>申报时间</th>
+                        <th>最后更新时间</th>
+                    </tr>
+                    </thead>
+                    <tbody id="subject-list">
+                    </tbody>
+                </table>
+            </div>
+
+
             <h2 class="sub-header">学生毕业设计信息</h2>
 
             <div class="table-responsive">
@@ -108,10 +129,12 @@
                         <th>是否需要操作</th>
                     </tr>
                     </thead>
-                    <tbody id="subject-list">
+                    <tbody id="student-list">
                     </tbody>
                 </table>
             </div>
+
+
         </div>
     </div>
 </div>
@@ -121,6 +144,7 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
 <script src="assets/js/holder.js"></script>
+<script src="teacher/teacher.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
 

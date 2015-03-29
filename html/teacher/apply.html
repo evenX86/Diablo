@@ -32,8 +32,11 @@
                 <li class=""><a href="/help" target="_blank">帮助信息</a></li>
                 <li class=""><a href="/contact" target="_blank">联系反馈</a></li>
                 {% if user %}
+                <li>
+                    <a style="float: left;cursor: pointer">欢迎{{user.username}},你的角色是{{user.type}}</a></li>
+                </li>
                 <li class="" style="float: right;">
-                    欢迎{{user.username}}<a href="/logout" target="_blank" style="float: left">注销</a></li>
+                    <a href="/logout" target="_blank" style="float: left">注销</a></li>
                 {% endif %}
             </ul>
             <form class="navbar-form navbar-right">

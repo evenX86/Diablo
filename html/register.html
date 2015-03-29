@@ -8,8 +8,12 @@
     <div style="float: left;width: 40%" >
         <form action="/regist-user" method="post" onsubmit="return checkForm();">
             <div class="form-group">
-                <label for="InputEmail1">用户名</label>
-                <input type="text" class="form-control" id="InputEmail1" placeholder="Username" name="username">
+                <label for="InputEmail1">用户名(使用学号或者教师ID注册)</label>
+                <input type="text" class="form-control" id="InputEmail1" placeholder="UserID" name="userid">
+            </div>
+            <div class="form-group">
+                <label for="InputEmail2">姓名</label>
+                <input type="text" class="form-control" id="InputEmail2" placeholder="Username" name="username">
             </div>
 
             <div class="form-group">
