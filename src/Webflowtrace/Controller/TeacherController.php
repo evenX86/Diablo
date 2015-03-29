@@ -68,7 +68,6 @@ class TeacherController implements ControllerProviderInterface{
             $major  = $request->get("major");
             $teacher = $user['username'];
             $teacherid = $user['id'];
-            echo date('Y-m-d', time());
             $flag = $app['db']->insert("shenfei_subject",[
                 'subject_title'=>$subject_title,
                 'subject_descripe'=>$subject_content,

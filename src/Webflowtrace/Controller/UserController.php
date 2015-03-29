@@ -7,6 +7,7 @@
  */
 
 namespace Webflowtrace\Controller;
+
 use Doctrine\Common\Annotations\Reader;
 use Silex\Application;
 use Silex\ControllerCollection;
@@ -16,7 +17,8 @@ use Webflowtrace\configuration;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class UserController implements ControllerProviderInterface{
+class UserController implements ControllerProviderInterface
+{
 
     /**
      * Returns routes to connect to the given application.
@@ -42,19 +44,19 @@ class UserController implements ControllerProviderInterface{
          * */
         $route->get(
             "/login", function () use ($app, $config) {
-            $user = $app[ 'session' ] ->get('user' );
-            if (null !=$user) {
-                return $app->redirect('/' );
+            $user = $app['session']->get('user');
+            if (null != $user) {
+                return $app->redirect('/');
             }
             return $app['twig']->render(
                 '/login.html',
-                ['config' => $config,'name'=>null]);
+                ['config' => $config, 'name' => null]);
         });
         /**
          * 处理登录页
          */
         $route->post(
-            "/account",function(Request $request) use($app,$config) {
+            "/account", function (Request $request) use ($app, $config) {
             $username = $request->get("username");
             $passwd = $request->get("password");
             $type = $request->get("type");
@@ -62,26 +64,28 @@ class UserController implements ControllerProviderInterface{
             $query = <<<QUERY
                 select * from shenfei_user where user_name= ? and user_passwd = ? and degree = ?
 QUERY;
-            $result = $app['db']->fetchall($query,[$username,$md5passwd,$type]);
-            $id = $result[0]['user_id'];
-            $flag =false;
-            if (count($result)){
-                $flag =true;
-            }
+            $result = $app['db']->fetchall($query, [$username, $md5passwd, $type]);
 
-            if ($flag) {
-                //验证成功,跳转
-                $app[ 'session' ] ->set('user' , array('username' => $username,'type'=>$type,'id'=>$id));
-                return $app->redirect('/');
-            } else {
-                return new Response("登录失败",200);
+
+            $flag = false;
+            if (count($result)) {
+                $flag = true;
             }
+            if (!$flag) {
+                return new Response("登录失败", 200);
+
+            }
+            $id = $result[0]['user_id'];
+            //验证成功,跳转
+            $app['session']->set('user', array('username' => $username, 'type' => $type, 'id' => $id));
+            return $app->redirect('/');
+
         });
         /**
          * 处理登录页
          */
         $route->post(
-            "/regist-user",function(Request $request) use($app,$config) {
+            "/regist-user", function (Request $request) use ($app, $config) {
             $username = $request->get("username");
             $userid = $request->get("userid");
             $passwd = $request->get("password");
@@ -89,17 +93,17 @@ QUERY;
             $md5passwd = md5($passwd);
             $flag = $app['db']->insert('shenfei_user',
                 [
-                    'user_name'=>$username,
-                    'user_id'=>$userid,
-                    'user_passwd'=>$md5passwd,
-                    'degree'=>$type
+                    'user_name' => $username,
+                    'user_id' => $userid,
+                    'user_passwd' => $md5passwd,
+                    'degree' => $type
                 ]);
             if ($flag) {
                 //验证成功,跳转
-                $app[ 'session' ] ->set('user' , array('username' => $username,'type'=>$type,'id'=>$userid));
+                $app['session']->set('user', array('username' => $username, 'type' => $type, 'id' => $userid));
                 return $app->redirect('/');
             } else {
-                return new Response("注册失败",200);
+                return new Response("注册失败", 200);
             }
         });
 
@@ -108,7 +112,7 @@ QUERY;
          * */
         $route->get(
             "/logout", function () use ($app, $config) {
-            $app[ 'session' ] ->set('user',null);
+            $app['session']->set('user', null);
             return $app->redirect('/');
         });
 
