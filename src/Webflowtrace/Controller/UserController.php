@@ -35,10 +35,83 @@ class UserController implements ControllerProviderInterface{
          */
         $route->before(
             function (Request $request) use ($app, $config) {
-                if (null === $user = $app['session']->get('user')) {
-                    return $app->redirect('/login');
-                }
+
             });
+        /**
+         * 登录页
+         * */
+        $route->get(
+            "/login", function () use ($app, $config) {
+            $user = $app[ 'session' ] ->get('user' );
+            if (null !=$user) {
+                return $app->redirect('/' );
+            }
+            return $app['twig']->render(
+                '/login.html',
+                ['config' => $config,'name'=>null]);
+        });
+        /**
+         * 处理登录页
+         */
+        $route->post(
+            "/account",function(Request $request) use($app,$config) {
+            $username = $request->get("username");
+            $passwd = $request->get("password");
+            $type = $request->get("type");
+            $md5passwd = md5($passwd);
+            $query = <<<QUERY
+                select * from shenfei_user where user_name= ? and user_passwd = ? and degree = ?
+QUERY;
+            $result = $app['db']->fetchall($query,[$username,$md5passwd,$type]);
+            $id = $result[0]['user_id'];
+            $flag =false;
+            if (count($result)){
+                $flag =true;
+            }
+
+            if ($flag) {
+                //验证成功,跳转
+                $app[ 'session' ] ->set('user' , array('username' => $username,'type'=>$type,'id'=>$id));
+                return $app->redirect('/');
+            } else {
+                return new Response("登录失败",200);
+            }
+        });
+        /**
+         * 处理登录页
+         */
+        $route->post(
+            "/regist-user",function(Request $request) use($app,$config) {
+            $username = $request->get("username");
+            $userid = $request->get("userid");
+            $passwd = $request->get("password");
+            $type = $request->get("type");
+            $md5passwd = md5($passwd);
+            $flag = $app['db']->insert('shenfei_user',
+                [
+                    'user_name'=>$username,
+                    'user_id'=>$userid,
+                    'user_passwd'=>$md5passwd,
+                    'degree'=>$type
+                ]);
+            if ($flag) {
+                //验证成功,跳转
+                $app[ 'session' ] ->set('user' , array('username' => $username,'type'=>$type,'id'=>$userid));
+                return $app->redirect('/');
+            } else {
+                return new Response("注册失败",200);
+            }
+        });
+
+        /**
+         * 退出登录页
+         * */
+        $route->get(
+            "/logout", function () use ($app, $config) {
+            $app[ 'session' ] ->set('user',null);
+            return $app->redirect('/');
+        });
+
         return $route;
     }
 }

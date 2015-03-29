@@ -2,9 +2,10 @@
 /**
  * Created by PhpStorm.
  * User: xuyifei01
- * Date: 2015/3/28
- * Time: 10:14
+ * Date: 2015/3/29
+ * Time: 11:13
  */
+
 namespace Webflowtrace\Controller;
 
 use Doctrine\Common\Annotations\Reader;
@@ -15,7 +16,8 @@ use Webflowtrace\configuration;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class MainController implements ControllerProviderInterface{
+class ProfController implements ControllerProviderInterface
+{
     /**
      * Returns routes to connect to the given application.
      *
@@ -32,24 +34,25 @@ class MainController implements ControllerProviderInterface{
          */
         $route->before(
             function (Request $request) use ($app, $config) {
-
+                if (null === $user = $app['session']->get('user')) {
+                    return $app->redirect('/login');
+                }
             });
-        /**
-         * 首页
-         */
-        $route->get(
-            "/", function () use ($app, $config) {
-            /*判断session中是否存在user，如果不存在则跳到登录页面*/
-            if (null === $user = $app[ 'session' ] ->get('user' )) {
-                return $app->redirect('/login' );
-            }
+
+        $route->get("/prof/audit-subject", function () use ($app, $config) {
+            $user = $app['session']->get('user');
             return $app['twig']->render(
-                '/index.html',
-                ['config' => $config,'user'=>$user]);
+                '/prof/audit_subject.html',
+                ['config' => $config, 'user' => $user]);
         });
+        $route->get("/restful/audit-list", function () use ($app, $config) {
+            $query = <<<QUERY
+                SELECT * FROM `shenfei_subject` WHERE ISNULL(prof_audit) OR prof_audit = "false"
+QUERY;
+            $result = $app['db']->fetchAll($query);
+            return $app->json($result);
 
-
-
+        });
         return $route;
     }
 }

@@ -2,9 +2,10 @@
 /**
  * Created by PhpStorm.
  * User: xuyifei01
- * Date: 2015/3/28
- * Time: 10:14
+ * Date: 2015/3/29
+ * Time: 11:14
  */
+
 namespace Webflowtrace\Controller;
 
 use Doctrine\Common\Annotations\Reader;
@@ -14,8 +15,7 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 use Webflowtrace\configuration;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
-class MainController implements ControllerProviderInterface{
+class CollegeController  implements ControllerProviderInterface{
     /**
      * Returns routes to connect to the given application.
      *
@@ -32,23 +32,10 @@ class MainController implements ControllerProviderInterface{
          */
         $route->before(
             function (Request $request) use ($app, $config) {
-
+                if (null === $user = $app['session']->get('user')) {
+                    return $app->redirect('/login');
+                }
             });
-        /**
-         * 首页
-         */
-        $route->get(
-            "/", function () use ($app, $config) {
-            /*判断session中是否存在user，如果不存在则跳到登录页面*/
-            if (null === $user = $app[ 'session' ] ->get('user' )) {
-                return $app->redirect('/login' );
-            }
-            return $app['twig']->render(
-                '/index.html',
-                ['config' => $config,'user'=>$user]);
-        });
-
-
 
         return $route;
     }

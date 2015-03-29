@@ -14,8 +14,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Webflowtrace\configuration;
 
-class RouteController implements ControllerProviderInterface {
-    private  $user = [];
+class RouteController implements ControllerProviderInterface
+{
+    private $user = [];
+
     public function connect(Application $app)
     {
         $route = $app['controllers_factory'];
@@ -40,39 +42,54 @@ class RouteController implements ControllerProviderInterface {
          * */
         $route->get(
             "/register", function () use ($app, $config) {
-
-            $user = $app[ 'session' ] ->get('user' );
+            $user = $app['session']->get('user');
             return $app['twig']->render(
                 '/register.html',
-                ['config' => $config,'name'=>$user['username']]);
+                ['config' => $config, 'name' => $user['username']]);
         });
         /* type view
          * */
         $route->get(
             "/help", function () use ($app, $config) {
+            $user = $app['session']->get('user');
             return $app['twig']->render(
                 '/help.html',
-                ['config' => $config]);
+                ['config' => $config, 'name' => $user['username']]);
         });
         /* type view
          * */
         $route->get(
             "/contact", function () use ($app, $config) {
+            $user = $app['session']->get('user');
             return $app['twig']->render(
-                '/contact.html',
-                ['config' => $config]);
+                '/contact.html', ['config' => $config, 'name' => $user['username']]);
+
         });
 
         /**
          * dashboard
          */
-        $route->get("/dashboard",function() use ($app,$config){
-            if (null === $user = $app[ 'session' ] ->get('user' )) {
-                return $app->redirect('/login' );
+        $route->get("/dashboard", function () use ($app, $config) {
+            if (null === $user = $app['session']->get('user')) {
+                return $app->redirect('/login');
+            }
+            $type = $user['type'];
+            
+            if ($type == "prof") {
+                $url = '/prof/dashboard.html';
+            } else if ($type == "student"){
+                $url = "/student/dashboard.html";
+            } else if ($type=="dean"){
+                $url = "/dean/dashboard.html";
+            } else if($type == "college") {
+                $url = "/college/dashboard.html";
+            } else {
+                $url = "/teacher/dashboard.html";
             }
             return $app['twig']->render(
-                '/admin/dashboard.html',
-                ['config' => $config,'name'=>$user['username']]);
+                $url,
+                ['config' => $config, 'user' => $user]);
+
         });
         return $route;
     }

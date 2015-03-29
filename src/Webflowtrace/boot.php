@@ -68,6 +68,9 @@ $app->mount('', new \Webflowtrace\Controller\StudentController());
 $app->mount('', new \Webflowtrace\Controller\TeacherController());
 $app->mount('', new \Webflowtrace\Controller\MainController());
 $app->mount('', new \Webflowtrace\Controller\UserController());
+$app->mount('', new \Webflowtrace\Controller\CollegeController());
+$app->mount('', new \Webflowtrace\Controller\DeanController());
+$app->mount('', new \Webflowtrace\Controller\ProfController());
 
 //$app['session.storage.handler'] = null;
 return $app;
