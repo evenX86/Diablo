@@ -8,10 +8,10 @@
  */
 use Silex\Provider\DoctrineServiceProvider;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Webflowtrace\Config;
-use Webflowtrace\Controller\MainController;
-use Webflowtrace\Controller\TreeController;
-use Webflowtrace\Controller\DBjsonController;
+use WebGMS\Config;
+use WebGMS\Controller\MainController;
+use WebGMS\Controller\TreeController;
+use WebGMS\Controller\DBjsonController;
 use Silex\Provider\TwigServiceProvider;
 
 $vendorDir = dirname(__DIR__);
@@ -52,7 +52,7 @@ $app->register(new DoctrineServiceProvider(),
 );
 
 /**映射控制器*/
-//$app->mount('', new \Webflowtrace\Controller\AuthController());
+//$app->mount('', new \WebGMS\Controller\AuthController());
 /*使控制器的数据不会被缓存*/
 if (! headers_sent()) {
     header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
@@ -61,16 +61,16 @@ if (! headers_sent()) {
     header("Cache-Control: post-check=0, pre-check=0", false);
     header("Pragma: no-cache");
 }
-$app->mount('', new \Webflowtrace\Controller\AdminController());
-$app->mount('', new \Webflowtrace\Controller\ContentController());
-$app->mount('', new \Webflowtrace\Controller\RouteController());
-$app->mount('', new \Webflowtrace\Controller\StudentController());
-$app->mount('', new \Webflowtrace\Controller\TeacherController());
-$app->mount('', new \Webflowtrace\Controller\MainController());
-$app->mount('', new \Webflowtrace\Controller\UserController());
-$app->mount('', new \Webflowtrace\Controller\CollegeController());
-$app->mount('', new \Webflowtrace\Controller\DeanController());
-$app->mount('', new \Webflowtrace\Controller\ProfController());
+$app->mount('', new \WebGMS\Controller\AdminController());
+$app->mount('', new \WebGMS\Controller\ContentController());
+$app->mount('', new \WebGMS\Controller\RouteController());
+$app->mount('', new \WebGMS\Controller\StudentController());
+$app->mount('', new \WebGMS\Controller\TeacherController());
+$app->mount('', new \WebGMS\Controller\MainController());
+$app->mount('', new \WebGMS\Controller\UserController());
+$app->mount('', new \WebGMS\Controller\CollegeController());
+$app->mount('', new \WebGMS\Controller\DeanController());
+$app->mount('', new \WebGMS\Controller\ProfController());
 
 //$app['session.storage.handler'] = null;
 return $app;

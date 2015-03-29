@@ -1,12 +1,5 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: yuhuitao
- * Date: 13-3-4
- * Time: 下午5:14
- * To change this template use File | Settings | File Templates.
- */
-namespace Webflowtrace\Util;
+namespace WebGMS\Util;
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;

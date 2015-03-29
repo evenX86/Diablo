@@ -6,13 +6,13 @@
  * Time: 11:14
  */
 
-namespace Webflowtrace\Controller;
+namespace WebGMS\Controller;
 
 use Doctrine\Common\Annotations\Reader;
 use Silex\Application;
 use Silex\ControllerProviderInterface;
 use Symfony\Component\Config\Definition\Exception\Exception;
-use Webflowtrace\configuration;
+use WebGMS\configuration;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 class CollegeController  implements ControllerProviderInterface{
@@ -50,7 +50,7 @@ class CollegeController  implements ControllerProviderInterface{
             $res = $app['db']->fetchAll($majorQuery,[$userid]);
             $major = $res[0]['major'];
             $query = <<<QUERY
-                select * from shenfei_subject where major = ? and prof_audit="true" and college_audit!="true"
+                select * from shenfei_subject where major = ? and prof_audit="true" and ISNULL(college_audit) or college_audit = "false"
 QUERY;
             $result = $app['db']->fetchAll($query,[$major]);
             return $app->json($result);

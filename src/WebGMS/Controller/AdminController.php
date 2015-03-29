@@ -1,26 +1,23 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: xuyifei01
- * Date: 2015/3/28
- * Time: 10:14
+ * User: xuyifei
+ * Date: 14-1-14
+ * Time: 上午9:45
  */
 
-namespace Webflowtrace\Controller;
-
+namespace WebGMS\Controller;
 
 use Doctrine\Common\Annotations\Reader;
 use Silex\Application;
-use Silex\ControllerCollection;
 use Silex\ControllerProviderInterface;
 use Symfony\Component\Config\Definition\Exception\Exception;
-use Webflowtrace\configuration;
+use WebGMS\configuration;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class StudentController implements ControllerProviderInterface
+class AdminController implements ControllerProviderInterface
 {
-
     /**
      * Returns routes to connect to the given application.
      *
@@ -30,18 +27,15 @@ class StudentController implements ControllerProviderInterface
      */
     public function connect(Application $app)
     {
-        // TODO: Implement connect() method.
         $route = $app['controllers_factory'];
         $config = new configuration();
-        /**
-         *  用户权限验证
-         */
         $route->before(
-            function (Request $request) use ($app, $config) {
-                if (null === $user = $app['session']->get('user')) {
-                    return $app->redirect('/login');
+            function () use ($app, $config) {
+                if (null === $user = $app[ 'session' ] ->get('user' )) {
+                    return $app->redirect('/login' );
                 }
             });
+
         return $route;
     }
 }

@@ -6,13 +6,13 @@
  * Time: 11:13
  */
 
-namespace Webflowtrace\Controller;
+namespace WebGMS\Controller;
 
 use Doctrine\Common\Annotations\Reader;
 use Silex\Application;
 use Silex\ControllerProviderInterface;
 use Symfony\Component\Config\Definition\Exception\Exception;
-use Webflowtrace\configuration;
+use WebGMS\configuration;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 

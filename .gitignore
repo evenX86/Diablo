@@ -3,6 +3,6 @@
 app/cache/dev/
 app/logs/
 .settings/
-src/Webflowtrace/configuration.php
+src/WebGMS/configuration.php
 click-map/app.php
 click-map/app.php

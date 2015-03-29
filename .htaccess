@@ -12,5 +12,5 @@ deny from all
 </Files>
 <Files *.php>
 order deny,allow
-allow from 192.168.120.75
+allow from 192.168.120.30
 </Files>

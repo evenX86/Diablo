@@ -1,15 +1,21 @@
 <?php
-namespace Webflowtrace\Controller;
+/**
+ * Created by PhpStorm.
+ * User: xuyifei01
+ * Date: 2015/3/29
+ * Time: 11:13
+ */
 
+namespace WebGMS\Controller;
+use Doctrine\Common\Annotations\Reader;
 use Silex\Application;
-use Silex\ControllerCollection;
 use Silex\ControllerProviderInterface;
+use Symfony\Component\Config\Definition\Exception\Exception;
+use WebGMS\configuration;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Webflowtrace\configuration;
 
-class ContentController implements ControllerProviderInterface
-{
+class DeanController  implements ControllerProviderInterface{
     /**
      * Returns routes to connect to the given application.
      *
@@ -26,8 +32,11 @@ class ContentController implements ControllerProviderInterface
          */
         $route->before(
             function (Request $request) use ($app, $config) {
-
+                if (null === $user = $app['session']->get('user')) {
+                    return $app->redirect('/login');
+                }
             });
+
         return $route;
     }
 }

@@ -6,13 +6,13 @@
  * Time: 22:57
  */
 
-namespace Webflowtrace\Controller;
+namespace WebGMS\Controller;
 
 use Silex\Application;
 use Silex\ControllerProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Webflowtrace\configuration;
+use WebGMS\configuration;
 
 class RouteController implements ControllerProviderInterface
 {
