@@ -65,13 +65,18 @@ class TeacherController implements ControllerProviderInterface{
             }
             $subject_title = $request->get("subject-title");
             $subject_content  = $request->get("subject-content");
+            $major  = $request->get("major");
             $teacher = $user['username'];
+            $teacherid = $user['id'];
             echo date('Y-m-d', time());
             $flag = $app['db']->insert("shenfei_subject",[
                 'subject_title'=>$subject_title,
                 'subject_descripe'=>$subject_content,
-                'teacher_id'=>$teacher,
-                'create_time'=>date('Y-m-d', time())
+                'teacher_id'=>$teacherid,
+                'teacher_name'=>$teacher,
+                'major'=>$major,
+                'create_time'=>date('Y-m-d', time()),
+                'update_time'=>date('Y-m-d', time())
             ]);
             if ($flag) {
                 return $app->redirect('/dashboard');
