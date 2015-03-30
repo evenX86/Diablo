@@ -54,9 +54,9 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="/dashboard">概览 <span class="sr-only">(current)</span></a></li>
+                <li><a href="/dashboard">概览 <span class="sr-only">(current)</span></a></li>
                 <li><a href="/student/subject/apply">实习课题申报</a></li>
-                <li><a href="/student/subject/select">实习课题选择</a></li>
+                <li class="active"><a href="/student/subject/select">实习课题选择</a></li>
                 <li><a href="#">课题申报表确认</a></li>
                 <li><a href="#">开题报告</a></li>
                 <li><a href="#">实习进程安排</a></li>
@@ -69,20 +69,21 @@
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h2 class="sub-header">Section title</h2>
+            <h2 class="sub-header">待选择课题</h2>
 
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Header</th>
-                        <th>Header</th>
-                        <th>Header</th>
-                        <th>Header</th>
+                        <th>课题编号</th>
+                        <th>课题名称</th>
+                        <th>课题所属教师</th>
+                        <th>课题所在学院</th>
+                        <th>申报时间</th>
+                        <th>操作</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="subject-enable">
 
                     </tbody>
                 </table>
@@ -91,11 +92,59 @@
     </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">课题审核</h4>
+            </div>
+            <div class="modal-body" id="subject-audit-modal">
+                <form action="/student/apply" method="post">
+                    <div class="form-group" hidden>
+                        <label for="subject-id-modal">课题标题</label>
+                        <input name="subject-id" type="text" class="form-control" id="subject-id-modal" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject-title-modal">课题标题</label>
+                        <input name="subject-title" type="text" class="form-control" id="subject-title-modal" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject-teacher-modal">申报教师</label>
+                        <input name="subject-teacher" type="text" class="form-control" id="subject-teacher-modal" value="钟锋" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject-teacherid-modal">申报学生</label>
+                        <input name="subject-teacherid" type="text" class="form-control" id="subject-teacherid-modal" value="钟锋" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInput2">是否申请</label>
+                        <select class="form-control" name="agree" id="exampleInput2">
+                            <option value="true">申请</option>
+                            <option value="false">不申请</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="submit" class="btn btn-primary">确定申请</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
 <script src="assets/js/holder.js"></script>
+<script src="student/student.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
 
