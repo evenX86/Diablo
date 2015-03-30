@@ -93,9 +93,54 @@ class TeacherController implements ControllerProviderInterface{
 QUERY;
             $result = $app['db']->fetchAll($query,[$user['id']]);
             return $app->json($result);
+        });
 
+
+        /**
+         * 指导教师确认学生选题
+         */
+        $route->get("/teacher/ensure/subject",function()use($app,$config){
+            $user = $app[ 'session' ] ->get('user' );
+            return $app['twig']->render(
+                '/teacher/ensure-subject.html',
+                ['config' => $config,'user'=>$user]);
 
         });
+
+        /**
+         * 获取教师名下的待确认课题列表
+         */
+            $route->get("/restful/teacher/ensure/list",function()use ($app,$config){
+            $user = $app['session']->get('user');
+            $query = <<<QUERY
+                select * from shenfei_subject where teacher_id=? and `select` ="true" and ensure_teacher = "false"
+QUERY;
+            $result = $app['db']->fetchAll($query,[$user['id']]);
+            return $app->json($result);
+        });
+
+        /**
+         * 处理课题确认的接口
+         * /teacher/ensure/select
+         */
+        $route->post("/teacher/ensure/select",function(Request $request)use ($app,$config){
+            $id = $request->get("subject-id");
+            $agree = $request->get("agree");
+            if ($agree == "false") {
+                return $app->redirect("/teacher/ensure/subject");
+            }
+            $sql = <<<QUERY
+                update shenfei_subject set `ensure_teacher` = ? where id = ?
+QUERY;
+
+            $flag = $app['db']->executeUpdate($sql,array("true",$id));
+            if ($flag) {
+                return $app->redirect("/teacher/ensure/subject");
+            } else {
+                return new Response("操作失败",200);
+            }
+        });
+
         return $route;
     }
 }

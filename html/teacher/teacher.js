@@ -23,4 +23,22 @@ function subjectList() {
 }
 $(document).ready(function () {
     subjectList();
+
 });
+
+function ensureSelectList() {
+    $.get("/restful/teacher/ensure/list",function(result){
+        for(var i=0;i<result.length;i++){
+            $("#subject-enable").append("<tr><td>"+result[i].id+"</td> <td>"+result[i].subject_title+"</td>" +
+            " <td>"+result[i].major+"</td> <td>"+result[i].student_id+"</td> <td> "+result[i].create_time+"</td><td><button type=\"button\" class=\"btn \" data-toggle=\"modal\" data-target=\"#myModal\" onclick='writeModal(\"" + result[i].subject_title + "\",\"" + result[i].student_id+ "\",\"" +  result[i].id + "\")'>" +
+            "确认 </button></td></tr>");
+        }
+    });
+
+}
+
+function writeModal(title, id,subjectID) {
+    $("#subject-title-modal").val(title);
+    $("#subject-teacherid-modal").val(id);
+    $("#subject-id-modal").val(subjectID);
+}
