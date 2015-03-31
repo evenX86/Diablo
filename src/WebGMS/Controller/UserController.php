@@ -88,15 +88,19 @@ QUERY;
             "/regist-user", function (Request $request) use ($app, $config) {
             $username = $request->get("username");
             $userid = $request->get("userid");
-            $passwd = $request->get("password");
+            $passwd = $request->get("passwd");
             $type = $request->get("type");
+            $major = $request->get("major");
+            $college = $request->get("college");
             $md5passwd = md5($passwd);
             $flag = $app['db']->insert('shenfei_user',
                 [
                     'user_name' => $username,
                     'user_id' => $userid,
                     'user_passwd' => $md5passwd,
-                    'degree' => $type
+                    'degree' => $type,
+                    'major' =>$major,
+                    'college' =>$college
                 ]);
             if ($flag) {
                 //验证成功,跳转
