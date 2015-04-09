@@ -71,6 +71,13 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h2 class="sub-header">您已选择课题</h2>
             <p>您选择的课题是              {{subjecttitle}}</p>
+            课题状态(课题需要经过指导教师和专业负责人确认):
+            <label>教师确认:{% if t %} <span class="glyphicon glyphicon-ok" ></span>
+                {% else %}<span class="glyphicon glyphicon-remove"></span>
+                {% endif %}</label>
+            <label>专业负责人确认:{% if p %} <span class="glyphicon glyphicon-ok"></span>
+                {% else %}  <span class="glyphicon glyphicon-remove"></span>
+                {% endif %}</label>
         </div>
     </div>
 </div>
@@ -130,5 +137,4 @@
 <script src="student/student.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
-
 {{include('footer.html')}}
