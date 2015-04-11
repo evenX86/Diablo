@@ -49,6 +49,14 @@ class ProfController implements ControllerProviderInterface
                 '/prof/audit_subject.html',
                 ['config' => $config, 'user' => $user]);
         });
+
+        $route->get("/prof/ensure-subject", function () use ($app, $config) {
+            $user = $app['session']->get('user');
+            return $app['twig']->render(
+                '/prof/ensure-subject.html',
+                ['config' => $config, 'user' => $user]);
+        });
+
         $route->get("/restful/audit-list", function () use ($app, $config) {
             $query = <<<QUERY
                 SELECT * FROM `shenfei_subject` WHERE ISNULL(prof_audit) OR prof_audit = "false"
@@ -77,6 +85,75 @@ QUERY;
 
 
         });
+
+        /**
+         * 获取教师名下的待确认课题列表
+         */
+        $route->get("/restful/prof/ensure/list",function()use ($app,$config){
+            $user = $app['session']->get('user');
+            $query = <<<QUERY
+                select major from shenfei_user where user_id=?
+QUERY;
+            $result = $app['db']->fetchAll($query,[$user['id']]);
+            $major = $result[0]['major'];
+            $query = <<<QUERY
+                select * from shenfei_subject where major = ? and ensure_teacher = 'true' and `select` = 'true' and ensure_prof = 'false'
+QUERY;
+            $result = $app['db']->fetchAll($query,[$major]);
+            return $app->json($result);
+        });
+        /**
+         * 处理课题确认的接口
+         * /prof/ensure/select
+         */
+        $route->post("/prof/ensure/select",function(Request $request)use ($app,$config){
+            $id = $request->get("subject-id");
+            $agree = $request->get("agree");
+            if ($agree == "false") {
+                return $app->redirect("/prof/ensure-subject");
+            }
+            $sql = <<<QUERY
+                update shenfei_subject set `ensure_prof` = ? where id = ?
+QUERY;
+
+            $flag = $app['db']->executeUpdate($sql,array("true",$id));
+            if ($flag) {
+                return $app->redirect("/prof/ensure-subject");
+            } else {
+                return new Response("操作失败",200);
+            }
+        });
+
+
         return $route;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

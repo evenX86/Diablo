@@ -46,10 +46,12 @@ class StudentController implements ControllerProviderInterface
                     return $app->redirect('/');
                 }
             });
+
         /**
-         * 学生选择课题模块
+         * 学生申报课题模块渲染
+         * /student/subject/apply
          */
-        $route->get("/student/subject/select", function () use ($app, $config) {
+        $route->get("/student/subject/apply", function () use ($app, $config) {
             $user = $app['session']->get('user');
             $query = <<<QUERY
                 select * from shenfei_subject where `select` = "true" and student_id = ?
@@ -60,8 +62,38 @@ QUERY;
 
                 $title  = $result[0]['subject_title'];
                 return $app['twig']->render(
-                    '/student/unvalid.html',
+                    '/student/apply.html',
                     ['config' => $config, 'user' => $user,'subjecttitle'=>$title]);
+            } else {
+                return $app['twig']->render(
+                    '/student/select.html',
+                    ['config' => $config, 'user' => $user]);
+            }
+        });
+
+        /**
+         * 学生选择课题模块
+         */
+        $route->get("/student/subject/select", function () use ($app, $config) {
+            $user = $app['session']->get('user');
+            $query = <<<QUERY
+                select * from shenfei_subject where `select` = "true" and student_id = ?
+QUERY;
+
+            $result = $app['db']->fetchAll($query,[$user['id']]);
+            if (count($result)>0) {
+                $teacherEnsuer = $result[0]['ensure_teacher'];
+                $profEnsure = $result[0]['ensure_prof'];
+                $title  = $result[0]['subject_title'];
+                if ($teacherEnsuer !="true") {
+                    $teacherEnsuer=null;
+                }
+                if ($profEnsure != "true") {
+                    $profEnsure = null;
+                }
+                return $app['twig']->render(
+                    '/student/unvalid.html',
+                    ['config' => $config, 'user' => $user,'subjecttitle'=>$title,'t'=>$teacherEnsuer,'p'=>$profEnsure]);
             } else {
                 return $app['twig']->render(
                     '/student/select.html',

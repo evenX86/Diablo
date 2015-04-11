@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>{{ config.title}}</title>
+    <base href="{{config.baseurl}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{config.title}},浙江树人大学, 毕业设计管理系统, SF">
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+    {{include('basecss.html')}}
+    <link href="assets/css/dashboard.css" rel="stylesheet" />
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+
+    <link rel="stylesheet" href="assets/css/signin.css">
+    {{include('basescript.html')}}
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">树大毕设过程管理系统</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class=""><a href="/" target="_blank">系统首页</a></li>
+                <li class=""><a href="/register" target="_blank">用户注册</a></li>
+                <li class=""><a href="/help" target="_blank">帮助信息</a></li>
+                <li class=""><a href="/contact" target="_blank">联系反馈</a></li>
+                {% if user %}
+                <li>
+                    <a style="float: left;cursor: pointer">欢迎{{user.username}},你的角色是{{user.type}}</a></li>
+                </li>
+                <li class="" style="float: right;">
+                    <a href="/logout" target="_blank" style="float: left">注销</a></li>
+                {% endif %}
+            </ul>
+            <form class="navbar-form navbar-right">
+                <input type="text" class="form-control" placeholder="Search...">
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li><a href="/dashboard">概览 <span class="sr-only">(current)</span></a></li>
+                <li class="active"> <a href="/student/subject/apply">实习课题申报</a></li>
+                <li><a href="/student/subject/select">实习课题选择</a></li>
+                <li><a href="#">课题申报表确认</a></li>
+                <li><a href="#">开题报告</a></li>
+                <li><a href="#">实习进程安排</a></li>
+                <li><a href="#">实习反馈1</a></li>
+                <li><a href="#">实习反馈2</a></li>
+                <li><a href="#">毕业论文</a></li>
+                <li><a href="#">实习考核</a></li>
+                <li><a href="#">指导老师意见</a></li>
+                <li><a href="#">消息</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h2 class="sub-header">申请课题单</h2>
+            <p>此部分尚未实现</p>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">课题审核</h4>
+            </div>
+            <div class="modal-body" id="subject-audit-modal">
+                <form action="/student/apply" method="post">
+                    <div class="form-group" hidden>
+                        <label for="subject-id-modal">课题标题</label>
+                        <input name="subject-id" type="text" class="form-control" id="subject-id-modal" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject-title-modal">课题标题</label>
+                        <input name="subject-title" type="text" class="form-control" id="subject-title-modal" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject-teacher-modal">申报教师</label>
+                        <input name="subject-teacher" type="text" class="form-control" id="subject-teacher-modal" value="钟锋" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject-teacherid-modal">申报学生</label>
+                        <input name="subject-teacherid" type="text" class="form-control" id="subject-teacherid-modal" value="钟锋" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInput2">是否申请</label>
+                        <select class="form-control" name="agree" id="exampleInput2">
+                            <option value="true">申请</option>
+                            <option value="false">不申请</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="submit" class="btn btn-primary">确定申请</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+<script src="assets/js/holder.js"></script>
+<script src="student/student.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+
+{{include('footer.html')}}
