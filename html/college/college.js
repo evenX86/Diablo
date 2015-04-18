@@ -38,6 +38,24 @@ function writeModal(title, name, id,major) {
     $("#subject-teacherid-modal").val(id);
 }
 
+function showTaskList() {
+    $.get("/restful/college/task-list",function(result){
+        for(var i=0;i<result.length;i++) {
+            console.log(result[0]);
+            $("#task-list").append("<tr><td>"+result[i].id+"</td> <td>"+result[i].student_name+"</td>" +
+            " <td>"+result[i].student_major+"</td> <td>"+result[i].student_task_name+"</td><td><button type=\"button\" class=\"btn \" data-toggle=\"modal\" data-target=\"#myModal\" onclick='TaskEnsureModal(\"" + result[i].student_id + "\",\"" +  result[i].student_name + "\",\"" +  result[i].student_major + "\")'>" +
+            "填写 </button></td></tr>");
+        }
+
+    });
+}
+
+function TaskEnsureModal(id,name,major){
+    $("#student-id").val(id);
+    $("#student-name").val(name);
+    $("#major").val(major);
+}
+
 $(document).ready(function () {
     auditList();
 });

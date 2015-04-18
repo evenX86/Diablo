@@ -80,6 +80,51 @@
     </div>
 </div>
 
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">课题审核</h4>
+            </div>
+            <div class="modal-body" id="subject-audit-modal">
+                <form action="/restful/college/task-ensure" method="post">
+                    <div class="form-group">
+                        <label for="student-id">学生ID</label>
+                        <input name="student-id" type="text" class="form-control" id="student-id" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="student-name">学生姓名</label>
+                        <input name="student-name" type="text" class="form-control" id="student-name" value="钟锋" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="major">课题所在专业</label>
+                        <input name="major" type="text" class="form-control" id="major" value="计算机科学与技术" readonly>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="exampleInput2">是否同意</label>
+                        <select class="form-control" name="agree" id="exampleInput2">
+                            <option value="true">同意</option>
+                            <option value="false">不同意</option>
+                        </select>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="submit" class="btn btn-primary">确定修改</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
@@ -88,5 +133,8 @@
 <script src="college/college.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+<script>
+showTaskList();
 
+</script>
 {{include('footer.html')}}
