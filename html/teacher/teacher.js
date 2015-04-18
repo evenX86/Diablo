@@ -42,3 +42,26 @@ function writeModal(title, id,subjectID) {
     $("#subject-teacherid-modal").val(id);
     $("#subject-id-modal").val(subjectID);
 }
+
+function showStudentList() {
+    $.get("/restful/teacher/student-list",function(result){
+        for(var i=0;i<result.length;i++){
+            var flag = 0;
+            if(result[i].task == null||result[i].task == "null") {
+                flag = "未填写";
+            } else {
+                flag  = "已完成"
+            }
+
+            $("#student-list").append("<tr><td>"+result[i].id+"</td> <td>"+result[i].name+"</td>" +
+            " <td>"+result[i].major+"</td> <td>"+result[i].title+"</td> <td> "+flag+"</td><td><button type=\"button\" class=\"btn \" data-toggle=\"modal\" data-target=\"#myModal\" onclick='TaskModal(\"" + result[i].id + "\",\"" +  result[i].name + "\",\"" +  result[i].major + "\")'>" +
+            "确认 </button></td></tr>");
+        }
+    });
+}
+
+function TaskModal(id,name,major) {
+    $("#studentNameInput").val(name);
+    $("#studentIDInput").val(id);
+    $("#exampleInput2").val(major);
+}
