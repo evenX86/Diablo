@@ -64,13 +64,35 @@
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <form action="/teacher/apply-deal" method="post">
+            <form action="/teacher/apply/practice-task" method="post">
                 <div class="form-group">
                     <label for="exampleInputEmail1">任务书标题</label>
                     <input name="subject-title" type="text" class="form-control" id="exampleInputEmail1" placeholder="Subject title">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInput2">课题所在专业</label>
+                    <label for="studentNameInput">学生名</label>
+                    <select class="form-control" name="major" id="studentNameInput">
+                        <option value="沈菲">沈菲</option>
+                        <option value="沈菲2">沈菲2</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="studentIDInput">学生学号</label>
+                    <select class="form-control" name="major" id="studentIDInput">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="taskInput">学生实习任务</label>
+                    <input name="student-task" type="text" class="form-control" id="taskInput" placeholder="Student Task">
+
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInput2">学生所在专业</label>
                     <select class="form-control" name="major" id="exampleInput2">
                         <option value="计算机科学与技术">计算机科学与技术</option>
                         <option value="计算机以外的专业都是垃圾专业">其余的专业都是垃圾专业</option>
@@ -78,7 +100,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="exampleInputPassword1">课题描述</label>
+                    <label for="exampleInputPassword1">任务书内容</label>
                     <textarea name="subject-content" type="text" class="form-control" id="exampleInputPassword1" style="height:500px"  placeholder="Subject Describe"></textarea>
                 </div>
                 <div class="form-group">
@@ -86,7 +108,7 @@
                     <input type="file" id="exampleInputFile">
                     <p class="help-block">你传了也没用</p>
                 </div>
-                <button type="submit" class="btn btn-default">确定申报</button>
+                <button type="submit" class="btn btn-default">确定提交</button>
             </form>
         </div>
     </div>
