@@ -219,6 +219,12 @@ QUERY;
             $title = $request->get("student-task");
             $major = $request->get("student-major");
 
+            $sql = <<<QUERY
+                update shenfei_subject set `task` = ? where student_id = ?
+QUERY;
+
+            $flag = $app['db']->executeUpdate($sql, array("true", $id));
+
             $flag = $app['db']->insert("shenfei_student_task", [
                 'student_name' => $name,
                 'student_id' => $id,
