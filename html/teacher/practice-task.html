@@ -33,10 +33,10 @@
                 <li class=""><a href="/contact" target="_blank">联系反馈</a></li>
                 {% if user %}
                 <li>
-                <a style="float: left;cursor: pointer">欢迎{{user.username}},你的角色是{{user.type}}</a></li>
+                    <a style="float: left;cursor: pointer">欢迎{{user.username}},你的角色是{{user.type}}</a></li>
                 </li>
-                <li class="">
-                   <a href="/logout" target="_blank" style="float: left">注销</a></li>
+                <li class="" style="float: right;">
+                    <a href="/logout" target="_blank" style="float: left">注销</a></li>
                 {% endif %}
             </ul>
             <form class="navbar-form navbar-right">
@@ -50,10 +50,10 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active"><a>概览 <span class="sr-only">(current)</span></a></li>
+                <li><a href="/dashboard">概览 <span class="sr-only">(current)</span></a></li>
                 <li><a href="/teacher/apply">课题申报</a></li>
                 <li><a href="/teacher/ensure/subject">学生选题确认</a></li>
-                <li><a href="/teacher/practise/task">学生实习任务书填写</a></li>
+                <li class="active"><a href="/teacher/practise/task">学生实习任务书填写</a></li>
                 <li><a href="">开题报告审核</a></li>
                 <li><a href="">中期1进度审核</a></li>
                 <li><a href="">中期2进度审核</a></li>
@@ -64,75 +64,30 @@
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">当前流程进度</h1>
-
-            <div class="row placeholders">
-                <div class="col-xs-6 col-sm-3 placeholder">
-                    <img data-src="holder.js/200x200/auto/sky" class="img-responsive"
-                         alt="Generic placeholder thumbnail">
-                    <h4>Label</h4>
-                    <span class="text-muted">Something else</span>
+            <form action="/teacher/apply-deal" method="post">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">任务书标题</label>
+                    <input name="subject-title" type="text" class="form-control" id="exampleInputEmail1" placeholder="Subject title">
                 </div>
-                <div class="col-xs-6 col-sm-3 placeholder">
-                    <img data-src="holder.js/200x200/auto/vine" class="img-responsive"
-                         alt="Generic placeholder thumbnail">
-                    <h4>Label</h4>
-                    <span class="text-muted">Something else</span>
+                <div class="form-group">
+                    <label for="exampleInput2">课题所在专业</label>
+                    <select class="form-control" name="major" id="exampleInput2">
+                        <option value="计算机科学与技术">计算机科学与技术</option>
+                        <option value="计算机以外的专业都是垃圾专业">其余的专业都是垃圾专业</option>
+                    </select>
                 </div>
-                <div class="col-xs-6 col-sm-3 placeholder">
-                    <img data-src="holder.js/200x200/auto/sky" class="img-responsive"
-                         alt="Generic placeholder thumbnail">
-                    <h4>Label</h4>
-                    <span class="text-muted">Something else</span>
+
+                <div class="form-group">
+                    <label for="exampleInputPassword1">课题描述</label>
+                    <textarea name="subject-content" type="text" class="form-control" id="exampleInputPassword1" style="height:500px"  placeholder="Subject Describe"></textarea>
                 </div>
-                <div class="col-xs-6 col-sm-3 placeholder">
-                    <img data-src="holder.js/200x200/auto/vine" class="img-responsive"
-                         alt="Generic placeholder thumbnail">
-                    <h4>Label</h4>
-                    <span class="text-muted">Something else</span>
+                <div class="form-group">
+                    <label for="exampleInputFile">附件</label>
+                    <input type="file" id="exampleInputFile">
+                    <p class="help-block">你传了也没用</p>
                 </div>
-            </div>
-
-
-            <h2 class="sub-header">课题申报信息</h2>
-
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>课题编号</th>
-                        <th>课题名称</th>
-                        <th>专业负责人审核</th>
-                        <th>学院负责人审核</th>
-                        <th>申报时间</th>
-                        <th>最后更新时间</th>
-                    </tr>
-                    </thead>
-                    <tbody id="subject-list">
-                    </tbody>
-                </table>
-            </div>
-
-
-            <h2 class="sub-header">学生毕业设计信息</h2>
-
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>学号</th>
-                        <th>姓名</th>
-                        <th>课题名称</th>
-                        <th>进度</th>
-                        <th>是否需要操作</th>
-                    </tr>
-                    </thead>
-                    <tbody id="student-list">
-                    </tbody>
-                </table>
-            </div>
-
-
+                <button type="submit" class="btn btn-default">确定申报</button>
+            </form>
         </div>
     </div>
 </div>
@@ -142,7 +97,6 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
 <script src="assets/js/holder.js"></script>
-<script src="teacher/teacher.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
 
