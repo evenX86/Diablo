@@ -50,16 +50,16 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="/dashboard">概览 <span class="sr-only">(current)</span></a></li>
+                <li ><a href="/dashboard">概览 <span class="sr-only">(current)</span></a></li>
                 <li><a href="/college/subject-audit">课题审核</a></li>
-                <li><a href="/college/task-ensure">任务书审核</a></li>
+                <li class="active" ><a href="/college/task-ensure">任务书审核</a></li>
                 <li><a href="#">开题成绩审核</a></li>
                 <li><a href="#">答辩成绩审核</a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-            <h2 class="sub-header">课题列表</h2>
+            <h2 class="sub-header">确认任务书</h2>
 
             <div class="table-responsive">
                 <table class="table table-striped">
@@ -68,8 +68,8 @@
                         <th>学生ID</th>
                         <th>学生姓名</th>
                         <th>学生专业</th>
-                        <th>毕业设计进度</th>
-                        <th>状态</th>
+                        <th>任务书标题</th>
+                        <th>操作</th>
                     </tr>
                     </thead>
                     <tbody id="task-list">
@@ -85,6 +85,7 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
 <script src="assets/js/holder.js"></script>
+<script src="college/college.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
 
