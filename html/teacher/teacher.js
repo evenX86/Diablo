@@ -55,7 +55,7 @@ function showStudentList() {
 
             $("#student-list").append("<tr><td>"+result[i].id+"</td> <td>"+result[i].name+"</td>" +
             " <td>"+result[i].major+"</td> <td>"+result[i].title+"</td> <td> "+flag+"</td><td><button type=\"button\" class=\"btn \" data-toggle=\"modal\" data-target=\"#myModal\" onclick='TaskModal(\"" + result[i].id + "\",\"" +  result[i].name + "\",\"" +  result[i].major + "\")'>" +
-            "确认 </button></td></tr>");
+            "填写 </button></td></tr>");
         }
     });
 }
