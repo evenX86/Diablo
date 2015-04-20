@@ -176,6 +176,15 @@ QUERY;
                 return new Response("操作失败", 200);
             }
         });
+            $route->get("/restful/show/taskdetail/{id}/",function($id) use($app,$config){
+            $id = intval($id);
+            $query = <<<QUERY
+                select * from shenfei_student_task where student_id = ?
+QUERY;
+            $result = $app['db']->fetchall($query,[$id]);
+            return $app->json($result);
+
+        });
 
         $route->get("/restful/teacher/student-list", function () use ($app, $config) {
             $user = $app['session']->get('user');
@@ -218,6 +227,7 @@ QUERY;
             $content = $request->get("content");
             $title = $request->get("student-task");
             $major = $request->get("student-major");
+            $college = $request->get("student-college");
 
             $sql = <<<QUERY
                 update shenfei_subject set `task` = ? where student_id = ?
@@ -230,7 +240,8 @@ QUERY;
                 'student_id' => $id,
                 'student_major' => $major,
                 'student_task_name' => $title,
-                'student_task_content' => $content
+                'student_task_content' => $content,
+                'college_name' => $college
             ]);
             if ($flag) {
                 return $app->redirect('/teacher/practise/task');
