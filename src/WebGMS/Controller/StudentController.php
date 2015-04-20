@@ -17,6 +17,8 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 use WebGMS\configuration;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\ParameterBag;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class StudentController implements ControllerProviderInterface
 {
@@ -99,6 +101,50 @@ QUERY;
                     '/student/select.html',
                     ['config' => $config, 'user' => $user]);
             }
+        });
+
+        /**
+         * 学生提交开题报告
+         */
+        $route->get("/student/start/report", function () use ($app, $config) {
+            $user = $app['session']->get('user');
+            $query = <<<Q
+                select * from   shenfei_subject where student_id = ?
+Q;
+            $result = $app['db']->fetchAll($query,[$user['id']]);
+            if ($result[0]['start_report'] =="true"||$result[0]['start_report'] ==true) {
+                return $app['twig']->render(
+                    '/student/start-report-already.html',
+                    ['config' => $config, 'user' => $user]);
+            }
+
+            return $app['twig']->render(
+                '/student/start-report.html',
+                ['config' => $config, 'user' => $user]);
+
+        });
+
+        $route->get("/restful/student/startr/info",function() use($app,$config){
+            $user = $app['session']->get('user');
+            $query = <<<Q
+                select * from shenfei_subject where student_id = ? and `select` = "true"
+Q;
+            $result = $app['db']->fetchAll($query,[$user['id']]);
+            return $app->json($result);
+        });
+        $route->post("/student/start/report/deal/",function(Request $request) use($app,$config){
+            $file = $request->files->get("uploadfile");
+            $id = $request->get("subject-id");
+            $uploaddir = "D:\\shenfei_upload";
+            if ($file ==null) {
+                return new Response("上传失败",500);
+            }
+            $file->move($uploaddir,$file->getClientOriginalName());
+            $sql = <<<QUERY
+                update shenfei_subject set `start_report` = "true" where id = ?
+QUERY;
+            $flag = $app['db']->executeUpdate($sql,[$id]);
+            return $app->redirect("/student/start/report");
         });
 
         /**

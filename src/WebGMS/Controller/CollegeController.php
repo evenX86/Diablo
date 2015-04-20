@@ -15,7 +15,9 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 use WebGMS\configuration;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-class CollegeController  implements ControllerProviderInterface{
+
+class CollegeController implements ControllerProviderInterface
+{
     /**
      * Returns routes to connect to the given application.
      *
@@ -37,40 +39,78 @@ class CollegeController  implements ControllerProviderInterface{
                 }
             });
 
-        $route->get("/college/subject-audit",function() use ($app,$config){
+        $route->get("/college/subject-audit", function () use ($app, $config) {
             $user = $app['session']->get('user');
             return $app['twig']->render(
                 '/college/subject-audit.html',
-                ['config' => $config,'user'=>$user]);
+                ['config' => $config, 'user' => $user]);
 
         });
-        $route->get("/restful/college/subject-audit-list",function() use ($app,$config){
+
+
+        $route->get("/college/task-ensure", function () use ($app, $config) {
+            $user = $app['session']->get('user');
+            return $app['twig']->render(
+                '/college/task-ensure.html',
+                ['config' => $config, 'user' => $user]);
+
+        });
+
+        $route->get("/restful/college/task-list", function () use ($app, $config) {
+            $user = $app['session']->get("user");
+            $query = <<<QUERY
+                select * from shenfei_user where user_id = ?
+QUERY;
+            $res = $app['db']->fetchAll($query, [$user['id']]);
+            $q = <<<Q
+                select * from shenfei_student_task where college_ensure = "false" and college_name = ?
+Q;
+            $result = $app['db']->fetchAll($q, [$res[0]['college']]);
+            return $app->json($result);
+        });
+
+        $route->post("/restful/college/task-ensure", function (Request $request) use ($app, $config) {
+
+            $id = $request->get("student-id");
+            $sql = <<<QUERY
+                update shenfei_student_task set `college_ensure` = "true" where student_id = ?
+QUERY;
+
+            $result = $app['db']->fetchAll($sql, [$id]);
+            if ($result) {
+                return $app->redirect("/dashboard");
+            } else {
+                return new Response("操作失败", 200);
+            }
+        });
+
+        $route->get("/restful/college/subject-audit-list", function () use ($app, $config) {
             $userid = $app['session']->get('user')['id'];
             $majorQuery = "select major from shenfei_user where user_id = ?";
-            $res = $app['db']->fetchAll($majorQuery,[$userid]);
+            $res = $app['db']->fetchAll($majorQuery, [$userid]);
             $major = $res[0]['major'];
             $query = <<<QUERY
                 select * from shenfei_subject where major = ? and prof_audit="true" and ISNULL(college_audit) or college_audit = "false"
 QUERY;
-            $result = $app['db']->fetchAll($query,[$major]);
+            $result = $app['db']->fetchAll($query, [$major]);
             return $app->json($result);
         });
-        $route->post("/college/subject-audit-deal",function(Request $request)use($app,$config){
+        $route->post("/college/subject-audit-deal", function (Request $request) use ($app, $config) {
             $subjectTitle = $request->get("subject-title");
             $teacherID = $request->get("subject-teacherid");
             $agree = $request->get("agree");
             $comment = $request->get("audit-comment");
-            $date =  date('Y-m-d', time());
+            $date = date('Y-m-d', time());
             $sql1 = "update shenfei_subject set college_audit = ? where subject_title = ? and teacher_id = ?";
             $sql2 = "update shenfei_subject set update_time = ?  where subject_title = ? and teacher_id = ?";
             $sql3 = "update shenfei_subject set college_comment = ? where subject_title = ? and teacher_id = ?";
-            $flag = $app['db']->executeUpdate($sql1,array($agree,$subjectTitle,$teacherID));
-            $flag = $app['db']->executeUpdate($sql2,array($date,$subjectTitle,$teacherID));
-            $flag = $app['db']->executeUpdate($sql3,array($comment,$subjectTitle,$teacherID));
+            $flag = $app['db']->executeUpdate($sql1, array($agree, $subjectTitle, $teacherID));
+            $flag = $app['db']->executeUpdate($sql2, array($date, $subjectTitle, $teacherID));
+            $flag = $app['db']->executeUpdate($sql3, array($comment, $subjectTitle, $teacherID));
             if ($flag) {
                 return $app->redirect("/college/subject-audit");
             } else {
-                return new Response("操作失败",200);
+                return new Response("操作失败", 200);
             }
         });
 

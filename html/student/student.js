@@ -25,3 +25,12 @@ function writeModal(title, name, id,subjectID) {
 function initEnv(i) {
     $("#catgory").children().eq(i).addClass("active");
 }
+function showStartReportInfo() {
+    $.get("/restful/student/startr/info",function(result){
+        $("#subject-title-modal").val(result[0]['subject_title']);
+        $("#subject-id-modal").val(result[0]['id']);
+        $("#subject-teacher-modal").val(result[0]['teacher_name']);
+        $("#subject-teacherid-modal").val(result[0]['student_id']);
+
+    });
+}
