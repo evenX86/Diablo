@@ -22,3 +22,6 @@ function writeModal(title, name, id,subjectID) {
     $("#subject-id-modal").val(subjectID);
 }
 
+function initEnv(i) {
+    $("#catgory").children().eq(i).addClass("active");
+}
