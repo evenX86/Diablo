@@ -14,6 +14,7 @@ use Silex\Application;
 use Silex\ControllerCollection;
 use Silex\ControllerProviderInterface;
 use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\Validator\Constraints\Date;
 use WebGMS\configuration;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -135,7 +136,7 @@ Q;
         $route->post("/student/start/report/deal/",function(Request $request) use($app,$config){
             $file = $request->files->get("uploadfile");
             $id = $request->get("subject-id");
-            $uploaddir = "D:\\shenfei_upload";
+            $uploaddir = "D:\\bishe\\Diablo\\resources\\upload\\startr";
             if ($file ==null) {
                 return new Response("上传失败",500);
             }
@@ -144,6 +145,20 @@ Q;
                 update shenfei_subject set `start_report` = "true" where id = ?
 QUERY;
             $flag = $app['db']->executeUpdate($sql,[$id]);
+
+            $query = <<<QUERY
+                select * from  shenfei_subject where id = ?
+QUERY;
+            $result = $app['db']->fetchAll($query,[$id]);
+
+            $flag = $app['db']->insert("shenfei_start_report", [
+                'student_id' => $result[0]['student_id'],
+                'teacher_id' => $result[0]['teacher_id'],
+                'report_name' => $result[0]['subject_title'],
+                'report_addr' => $uploaddir."\\".$file->getClientOriginalName(),
+                'insert_date' =>  date('Y-m-d', time()),
+            ]);
+
             return $app->redirect("/student/start/report");
         });
 
