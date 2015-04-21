@@ -56,6 +56,66 @@ class TeacherController implements ControllerProviderInterface
                 '/teacher/apply.html',
                 ['config' => $config, 'user' => $user]);
         });
+
+        /**
+         * 审核开题报告
+         * */
+        $route->get(
+            "/teacher/ensure/startr", function () use ($app, $config) {
+            $user = $app['session']->get('user');
+            return $app['twig']->render(
+                '/teacher/ensure-startr.html',
+                ['config' => $config, 'user' => $user]);
+        });
+
+        $route->get("/restful/teacher/ensure/startr",function() use($app,$config){
+            $user = $app['session']->get('user');
+
+            $query = <<<QU
+                select * from shenfei_start_report where teacher_id = ?
+QU;
+            $result = $app['db']->fetchAll($query,[$user['id']]);
+
+            $info = <<<INFO
+                select * from shenfei_user
+INFO;
+            $m = $app['db']->fetchAll($info);
+
+            $name = [];
+
+            foreach ($m as $row) {
+                $name[$row['user_id']] = $row['user_name'];
+            }
+            $final = [];
+            foreach($result as $row){
+                $addr = $row['report_addr'];
+                $arr = explode("\\",$addr);
+                $addr = "http://localhost:/resources/upload/startr/".$arr[count($arr)-1];
+                array_push($final,[
+                    'id'=>$row['id'],
+                    'student'=>$name[$row['student_id']],
+                    'addr'=>$addr,
+                    'report'=>$row['report_name'],
+                    'ensure'=>$row['ensure_teacher']
+                ]);
+            }
+
+            return $app->json($final);
+
+        });
+        $route->post("/teacher/ensure/startr",function(Request $request) use($app,$config){
+            $id = $request->get("id");
+            $agree = $request->get("agree");
+            $sql = <<<QUERY
+                update shenfei_start_report set `ensure_teacher` = ? where id = ?
+QUERY;
+            $flag = $app['db']->executeUpdate($sql, array($agree, $id));
+            if ($flag)
+                return $app->redirect("/teacher/ensure/startr");
+            else {
+                return new Response("审核失败，请联系管理员");
+            }
+        });
         /**
          * 处理课题申报的控制器
          *

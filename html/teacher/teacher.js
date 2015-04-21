@@ -85,3 +85,29 @@ function TaskModal2(id, name, major) {
 function initEnv(i) {
     $("#category").children().eq(i).addClass("active");
 }
+function showStartRList(){
+    $.get("/restful/teacher/ensure/startr",function(result) {
+        for (var i = 0; i < result.length; i++) {
+            var flag = 0;
+            if (result[i].ensure == null || result[i].ensure == "null" || result[i].ensure == "") {
+                flag = "未审查";
+
+                $("#startr-list").append("<tr><td>" + result[i].id + "</td> <td>" + result[i].report + "</td>" +
+                " <td>" + result[i].student + "</td> <td><a href='"+result[i].addr+"'>下载</a></td> <td> " + flag + "</td><td><button type=\"button\" class=\"btn \" data-toggle=\"modal\" data-target=\"#myModal\" onclick='StartRModal(\"" + result[i].id + "\",\"" + result[i].report + "\",\"" + result[i].student + "\")'>" +
+                "审查 </button></td></tr>");
+            } else {
+                flag = "审查完成"
+                $("#startr-list").append("<tr><td>" + result[i].id + "</td> <td>" + result[i].report + "</td>" +
+                " <td>" + result[i].student + "</td><td><a href='"+result[i].addr+"'>下载</a></td><td> " + flag + "</td><td><button type=\"button\" class=\"btn disabled\" data-toggle=\"modal\" data-target=\"#myModal\" onclick='StartRModal(\"" + result[i].id + "\",\"" + result[i].report + "\",\"" + result[i].student + "\")'>" +
+                "审查 </button></td></tr>");
+            }
+
+        }
+    });
+}
+
+function StartRModal(id,report,name){
+    $("#startr-id-modal").val(id);
+    $("#startr-title-modal").val(report);
+    $("#startr-student-modal").val(name);
+}
