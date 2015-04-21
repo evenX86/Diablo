@@ -82,3 +82,6 @@ function TaskModal2(id, name, major) {
         $("#submitBtn").css("display","none");
     })
 }
+function initEnv(i) {
+    $("#category").children().eq(i).addClass("active");
+}

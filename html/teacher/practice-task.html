@@ -48,21 +48,7 @@
 <!-- 指导教师-->
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-            <ul class="nav nav-sidebar">
-                <li><a href="/dashboard">概览 <span class="sr-only">(current)</span></a></li>
-                <li><a href="/teacher/apply">课题申报</a></li>
-                <li><a href="/teacher/ensure/subject">学生选题确认</a></li>
-                <li   class="active"><a href="/teacher/practise/task">学生实习任务书填写</a></li>
-                <li><a href="">开题报告审核</a></li>
-                <li><a href="">中期1进度审核</a></li>
-                <li><a href="">中期2进度审核</a></li>
-                <li><a href="">实习意见填写</a></li>
-                <li><a href="">实习单位意见填写</a></li>
-                <li><a href="">学生进程安排审核</a></li>
-                <li><a href="">消息</a></li>
-            </ul>
-        </div>
+        {{include('teacher/category.html')}}
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h2 class="sub-header">实习任务书填写</h2>
 
@@ -150,6 +136,8 @@
 <script>
     $(document).ready(function(){
         showStudentList();
+        initEnv(3);
+
     });
 </script>
 {{include('footer.html')}}
