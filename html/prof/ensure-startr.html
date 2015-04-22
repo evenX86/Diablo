@@ -47,30 +47,31 @@
 </nav>
 <!-- 指导教师-->
 <div class="container-fluid">
-    <div class="row">
-        {{include('prof/category.html')}}
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h2 class="sub-header">待确认课题</h2>
 
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>课题编号</th>
-                        <th>课题名称</th>
-                        <th>课题所在专业</th>
-                        <th>课题所选学生</th>
-                        <th>申报时间</th>
-                        <th>操作</th>
-                    </tr>
-                    </thead>
-                    <tbody id="subject-enable">
+    {{include('prof/category.html')}}
 
-                    </tbody>
-                </table>
-            </div>
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <h2 class="sub-header">待确认开题报告</h2>
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>开题报告编号</th>
+                    <th>课题名称</th>
+                    <th>课题所选学生</th>
+                    <th>开题报告</th>
+                    <th>进度</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody id="startr-list">
+
+                </tbody>
+            </table>
         </div>
     </div>
+</div>
 </div>
 
 
@@ -80,22 +81,22 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">课题审核</h4>
+                <h4 class="modal-title" id="myModalLabel">审核</h4>
             </div>
             <div class="modal-body" id="subject-audit-modal">
-                <form action="/prof/ensure/select" method="post">
+                <form action="/prof/ensure/startr" method="post">
                     <div class="form-group" hidden>
-                        <label for="subject-id-modal">课题标题</label>
-                        <input name="subject-id" type="text" class="form-control" id="subject-id-modal" readonly>
+                        <label for="startr-id-modal">课题标题</label>
+                        <input name="id" type="text" class="form-control" id="startr-id-modal" readonly>
                     </div>
                     <div class="form-group">
-                        <label for="subject-title-modal">课题标题</label>
-                        <input name="subject-title" type="text" class="form-control" id="subject-title-modal" readonly>
+                        <label for="startr-title-modal">课题标题</label>
+                        <input name="subject-title" type="text" class="form-control" id="startr-title-modal" readonly>
                     </div>
 
                     <div class="form-group">
-                        <label for="subject-teacherid-modal">申报学生</label>
-                        <input name="subject-teacherid" type="text" class="form-control" id="subject-teacherid-modal" value="钟锋" readonly>
+                        <label for="startr-student-modal">申报学生</label>
+                        <input name="subject-teacherid" type="text" class="form-control" id="startr-student-modal" value="钟锋" readonly>
                     </div>
 
                     <div class="form-group">
@@ -107,7 +108,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        <button type="submit" class="btn btn-primary">同意选题</button>
+                        <button type="submit" class="btn btn-primary">确定通过</button>
                     </div>
                 </form>
             </div>
@@ -125,8 +126,8 @@
 <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
 <script>
     $(document).ready(function(){
-        ensureSelectList();
-        initEnv(2);
+        showStartRList();
+        initEnv(3);
     });
 </script>
 {{include('footer.html')}}

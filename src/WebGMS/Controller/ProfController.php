@@ -56,6 +56,16 @@ class ProfController implements ControllerProviderInterface
                 '/prof/ensure-subject.html',
                 ['config' => $config, 'user' => $user]);
         });
+        /**
+         * 审核开题报告
+         */
+        $route->get("/prof/ensure-startr", function () use ($app, $config) {
+            $user = $app['session']->get('user');
+            return $app['twig']->render(
+                '/prof/ensure-startr.html',
+                ['config' => $config, 'user' => $user]);
+        });
+
 
         $route->get("/restful/audit-list", function () use ($app, $config) {
             $query = <<<QUERY
@@ -124,6 +134,73 @@ QUERY;
             }
         });
 
+        $route->get("/restful/prof/startr/list",function() use($app,$config){
+            $user = $app['session']->get('user');
+            $query = <<<Q
+                select * from shenfei_user where id = ?
+Q;
+            $userInfo = $app['db']->fetchAll($query,[$user['id']]);
+            $major = $userInfo[0]['major'];
+            $sql = <<<QU
+                SELECT
+                    subject_title,shenfei_start_report.ensure_teacher,shenfei_start_report.ensure_prof,shenfei_start_report.student_id,shenfei_start_report.id,shenfei_start_report.report_addr
+                FROM
+                    shenfei_subject
+
+                right JOIN shenfei_start_report ON shenfei_subject.student_id = shenfei_start_report.student_id
+
+                WHERE
+                    shenfei_subject.start_report = "true"
+                AND shenfei_subject.major = ?
+QU;
+            $result = $app['db']->fetchAll($sql,[$major]);
+
+            $info = <<<INFO
+                select * from shenfei_user
+INFO;
+            $m = $app['db']->fetchAll($info);
+
+            $name = [];
+
+            foreach ($m as $row) {
+                $name[$row['user_id']] = $row['user_name'];
+            }
+
+            $final = [];
+            foreach($result as $row){
+                $flag = 0;
+                $addr = $row['report_addr'];
+                $arr = explode("\\",$addr);
+                $addr = "http://localhost:/resources/upload/startr/".$arr[count($arr)-1];
+                if ($row['ensure_teacher'] =="true"&&$row['ensure_prof'] =="true") {$flag = 1;}
+                else if($row['ensure_teacher'] =="true") {
+                    $flag = 2;
+                }
+                array_push($final,[
+                    'id'=>$row['id'],
+                    'addr'=>$addr,
+                    'title'=>$row['subject_title'],
+                    'student'=>$name[$row['student_id']],
+                    'flag'=>$flag
+                ]);
+            }
+
+            return $app->json($final);
+        });
+
+        $route->post("/prof/ensure/startr",function(Request $request) use($app,$config){
+            $id = $request->get("id");
+            $agree = $request->get("agree");
+            $sql = <<<QUERY
+                update shenfei_start_report set `ensure_prof` = ? where id = ?
+QUERY;
+            $flag = $app['db']->executeUpdate($sql, array($agree, $id));
+            if ($flag)
+                return $app->redirect("/prof/ensure-startr");
+            else {
+                return new Response("审核失败，请联系管理员");
+            }
+        });
 
         return $route;
     }
