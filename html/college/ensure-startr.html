@@ -82,7 +82,7 @@
                 <h4 class="modal-title" id="myModalLabel">审核</h4>
             </div>
             <div class="modal-body" id="subject-audit-modal">
-                <form action="/prof/ensure/startr" method="post">
+                <form action="/college/ensure/startr" method="post">
                     <div class="form-group" hidden>
                         <label for="startr-id-modal">课题标题</label>
                         <input name="id" type="text" class="form-control" id="startr-id-modal" readonly>
@@ -98,15 +98,17 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="exampleInput2">是否同意</label>
+                        <label for="exampleInput2">成绩</label>
                         <select class="form-control" name="agree" id="exampleInput2">
-                            <option value="true">同意</option>
-                            <option value="false">不同意</option>
+                            <option value="优">优</option>
+                            <option value="良">良</option>
+                            <option value="及格">及格</option>
+                            <option value="不及格">不及格</option>
                         </select>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        <button type="submit" class="btn btn-primary">确定通过</button>
+                        <button type="submit" class="btn btn-primary">确定审核</button>
                     </div>
                 </form>
             </div>
@@ -119,7 +121,7 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
 <script src="assets/js/holder.js"></script>
-<script src="prof/prof.js"></script>
+<script src="college/college.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
 <script>

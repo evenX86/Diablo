@@ -56,10 +56,31 @@ function TaskEnsureModal(id,name,major){
     $("#major").val(major);
 }
 
-$(document).ready(function () {
-    auditList();
-});
+
 
 function initEnv(i) {
     $("#category").children().eq(i).addClass("active");
+}
+
+function showStartRList() {
+    $.get("/restful/college/startr/list",function(result){
+        for (var i = 0; i < result.length; i++) {
+            var flag = 0;
+            if (result[i].level == "null" ||result[i].level == null) {
+                $("#startr-list").append("<tr><td>" + result[i].id + "</td> <td>" + result[i].title + "</td>" +
+                " <td>" + result[i].student + "</td> <td><a href='"+result[i].addr+"'>下载</a></td> <td> 未判定成绩</td><td><button type=\"button\" class=\"btn \" data-toggle=\"modal\" data-target=\"#myModal\" onclick='StartRModal(\"" + result[i].id + "\",\"" + result[i].title + "\",\"" + result[i].student + "\")'>" +
+                "审核 </button></td></tr>");
+            }  else {
+                $("#startr-list").append("<tr><td>" + result[i].id + "</td> <td>" + result[i].title + "</td>" +
+                " <td>" + result[i].student + "</td><td><a href='"+result[i].addr+"'>下载</a></td><td> "+result[i].level +"</td><td><button type=\"button\" class=\"btn disabled\" data-toggle=\"modal\" data-target=\"#myModal\" onclick='StartRModal(\"" + result[i].id + "\",\"" + result[i].title + "\",\"" + result[i].student + "\")'>" +
+                "审核 </button></td></tr>");
+            }
+
+        }
+    });
+}
+function StartRModal(id,report,name){
+    $("#startr-id-modal").val(id);
+    $("#startr-title-modal").val(report);
+    $("#startr-student-modal").val(name);
 }
