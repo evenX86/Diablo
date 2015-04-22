@@ -59,3 +59,7 @@ function TaskEnsureModal(id,name,major){
 $(document).ready(function () {
     auditList();
 });
+
+function initEnv(i) {
+    $("#category").children().eq(i).addClass("active");
+}

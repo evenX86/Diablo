@@ -45,31 +45,31 @@
         </div>
     </div>
 </nav>
-<!-- 学院负责人 -->
+<!-- 指导教师-->
 <div class="container-fluid">
-    <div class="row">
-        {{include('college/category.html')}}
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    {{include('college/category.html')}}
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <h2 class="sub-header">待确认开题报告</h2>
 
-            <h2 class="sub-header">确认任务书</h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>开题报告编号</th>
+                    <th>课题名称</th>
+                    <th>课题所选学生</th>
+                    <th>开题报告</th>
+                    <th>进度</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody id="startr-list">
 
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>学生ID</th>
-                        <th>学生姓名</th>
-                        <th>学生专业</th>
-                        <th>任务书标题</th>
-                        <th>操作</th>
-                    </tr>
-                    </thead>
-                    <tbody id="task-list">
-                    </tbody>
-                </table>
-            </div>
+                </tbody>
+            </table>
         </div>
     </div>
+</div>
 </div>
 
 
@@ -79,24 +79,23 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">课题审核</h4>
+                <h4 class="modal-title" id="myModalLabel">审核</h4>
             </div>
             <div class="modal-body" id="subject-audit-modal">
-                <form action="/restful/college/task-ensure" method="post">
-                    <div class="form-group">
-                        <label for="student-id">学生ID</label>
-                        <input name="student-id" type="text" class="form-control" id="student-id" readonly>
+                <form action="/prof/ensure/startr" method="post">
+                    <div class="form-group" hidden>
+                        <label for="startr-id-modal">课题标题</label>
+                        <input name="id" type="text" class="form-control" id="startr-id-modal" readonly>
                     </div>
                     <div class="form-group">
-                        <label for="student-name">学生姓名</label>
-                        <input name="student-name" type="text" class="form-control" id="student-name" value="钟锋" readonly>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="major">课题所在专业</label>
-                        <input name="major" type="text" class="form-control" id="major" value="计算机科学与技术" readonly>
+                        <label for="startr-title-modal">课题标题</label>
+                        <input name="subject-title" type="text" class="form-control" id="startr-title-modal" readonly>
                     </div>
 
+                    <div class="form-group">
+                        <label for="startr-student-modal">申报学生</label>
+                        <input name="subject-teacherid" type="text" class="form-control" id="startr-student-modal" value="钟锋" readonly>
+                    </div>
 
                     <div class="form-group">
                         <label for="exampleInput2">是否同意</label>
@@ -105,10 +104,9 @@
                             <option value="false">不同意</option>
                         </select>
                     </div>
-
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        <button type="submit" class="btn btn-primary">确定修改</button>
+                        <button type="submit" class="btn btn-primary">确定通过</button>
                     </div>
                 </form>
             </div>
@@ -116,17 +114,18 @@
         </div>
     </div>
 </div>
-
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
 <script src="assets/js/holder.js"></script>
-<script src="college/college.js"></script>
+<script src="prof/prof.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
 <script>
-showTaskList();
-initEnv(2)
+    $(document).ready(function(){
+        showStartRList();
+        initEnv(3);
+    });
 </script>
 {{include('footer.html')}}
