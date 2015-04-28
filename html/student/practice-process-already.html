@@ -54,38 +54,8 @@
     <div class="row">
         {{include('student/catgory.html')}}
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h2 class="sub-header">实习过程安排表提交</h2>
-            <div class="modal-body" id="subject-audit-modal">
-                <form action="/student/practice/process/deal/" method="post" enctype="multipart/form-data">
-                    <div class="form-group" hidden>
-                        <label for="subject-id-modal">课题标题</label>
-                        <input name="subject-id" type="text" class="form-control" id="subject-id-modal" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="subject-title-modal">课题标题</label>
-                        <input name="subject-title" type="text" class="form-control" id="subject-title-modal" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="subject-teacher-modal">申报教师</label>
-                        <input name="subject-teacher" type="text" class="form-control" id="subject-teacher-modal" value="钟锋" readonly>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="subject-teacherid-modal">申报学生</label>
-                        <input name="subject-teacherid" type="text" class="form-control" id="subject-teacherid-modal" value="钟锋" readonly>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="exampleInputFile">开题报告</label>
-                        <input type="file" id="exampleInputFile" name="uploadfile">
-                        <p class="help-block">请上传word文件,以pratice+学号+姓名拼音命名,中间以下划线分隔,如practice_20125641030_shengfei.doc</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        <button type="submit" class="btn btn-primary">确定提交</button>
-                    </div>
-                </form>
-            </div>
+            <h2 class="sub-header">开题报告</h2>
+            您已完成实习过程安排表的提交。
         </div>
     </div>
 </div>
