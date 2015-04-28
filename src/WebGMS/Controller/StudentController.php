@@ -125,6 +125,64 @@ Q;
                 ['config' => $config, 'user' => $user]);
 
         });
+
+        /**
+         * 学生提交实习总结
+         */
+        $route->get("/student/practice/summary", function () use ($app, $config) {
+            $user = $app['session']->get('user');
+            $query = <<<Q
+                select * from   shenfei_practice_process where student_id = ? and ensure_teacher = "true"
+Q;
+            $result = $app['db']->fetchAll($query,[$user['id']]);
+            if ($result[0]['summary'] ==null||$result[0]['summary'] =="null") {
+                return $app['twig']->render(
+                    '/student/practice-summary.html',
+                    ['config' => $config, 'user' => $user]);
+            }
+
+            return $app['twig']->render(
+                '/student/practice-summary-already.html',
+                ['config' => $config, 'user' => $user]);
+
+        });
+
+        /**
+         * 学生实习总结
+         */
+        $route->get("/restful/student/summary/info", function () use ($app, $config) {
+            $user = $app['session']->get('user');
+            $query = <<<Q
+                select * from shenfei_practice_process where student_id = ? and `ensure_teacher` = "true"
+Q;
+            $result = $app['db']->fetchAll($query,[$user['id']]);
+            return $app->json($result);
+
+        });
+
+        /**
+         * 处理实习进程表安排的提交
+         */
+        $route->post("/student/practice/summary/deal/",function(Request $request) use($app,$config){
+            $file = $request->files->get("uploadfile");
+            $id = $request->get("subject-id");
+            $uploaddir = "D:\\bishe\\Diablo\\resources\\upload\\startr";
+            if ($file ==null) {
+                return new Response("上传失败",500);
+            }
+            $file->move($uploaddir,$file->getClientOriginalName());
+            $sql = <<<QUERY
+                update shenfei_practice_process set `summary` = ? where id = ?
+QUERY;
+            $filename = $uploaddir."\\".$file->getClientOriginalName();
+            $flag = $app['db']->executeUpdate($sql,[$filename,$id]);
+            if($flag) {
+                return $app->redirect("/student/practice/summary");
+            } else {
+                return new Response("上传失败");
+            }
+        });
+
         /**
          * 处理实习进程表安排的提交
          */

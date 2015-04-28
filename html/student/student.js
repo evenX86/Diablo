@@ -26,10 +26,9 @@ function initEnv(i) {
     $("#catgory").children().eq(i).addClass("active");
 }
 function showStartReportInfo() {
-    $.get("/restful/student/startr/info",function(result){
-        $("#subject-title-modal").val(result[0]['subject_title']);
+    $.get("/restful/student/summary/info",function(result){
+        $("#subject-title-modal").val(result[0]['report_name']);
         $("#subject-id-modal").val(result[0]['id']);
-        $("#subject-teacher-modal").val(result[0]['teacher_name']);
         $("#subject-teacherid-modal").val(result[0]['student_id']);
 
     });
