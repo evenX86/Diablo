@@ -49,21 +49,22 @@
 <div class="container-fluid">
     {{include('college/category.html')}}
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        <h2 class="sub-header">待确认开题报告</h2>
+        <h2 class="sub-header">待审核学生</h2>
 
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th>论文编号</th>
-                    <th>课题名称</th>
-                    <th>课题所选学生</th>
-                    <th>论文</th>
+                    <th>编号</th>
+                    <th>学号</th>
+                    <th>姓名</th>
+                    <th>学生所选课题</th>
+                    <th>专业意见</th>
                     <th>进度</th>
                     <th>操作</th>
                 </tr>
                 </thead>
-                <tbody id="startr-list">
+                <tbody id="advise-list">
 
                 </tbody>
             </table>
@@ -82,7 +83,7 @@
                 <h4 class="modal-title" id="myModalLabel">审核</h4>
             </div>
             <div class="modal-body" id="subject-audit-modal">
-                <form action="/college/ensure/paper" method="post">
+                <form action="/college/ensure/advise" method="post">
                     <div class="form-group" hidden>
                         <label for="startr-id-modal">课题标题</label>
                         <input name="id" type="text" class="form-control" id="startr-id-modal" readonly>
@@ -96,14 +97,16 @@
                         <label for="startr-student-modal">申报学生</label>
                         <input name="subject-teacherid" type="text" class="form-control" id="startr-student-modal" value="钟锋" readonly>
                     </div>
+                    <div class="form-group">
+                        <label for="startr-student-modal">意见</label>
+                        <input name="suggest" type="text" class="form-control">
+                    </div>
 
                     <div class="form-group">
-                        <label for="exampleInput2">成绩</label>
+                        <label for="exampleInput2">审核</label>
                         <select class="form-control" name="agree" id="exampleInput2">
-                            <option value="优">优</option>
-                            <option value="良">良</option>
-                            <option value="及格">及格</option>
-                            <option value="不及格">不及格</option>
+                            <option value="true">通过</option>
+                            <option value="false">不通过</option>
                         </select>
                     </div>
                     <div class="modal-footer">
@@ -126,8 +129,8 @@
 <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
 <script>
     $(document).ready(function(){
-        showPaperList();
-        initEnv(4);
+        showAdviseList();
+        initEnv(5);
     });
 </script>
 {{include('footer.html')}}

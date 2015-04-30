@@ -102,3 +102,22 @@ function showPaperList() {
         }
     });
 }
+
+function showAdviseList() {
+    $.get("/restful/college/advise/list",function(result){
+        for (var i = 0; i < result.length; i++) {
+            if (result[i].ensure_college == "true") {
+                $("#advise-list").append("<tr><td>" + result[i].id + "</td><td>" + result[i].student_id + "</td><td>" + result[i].student + "</td>" +
+                " <td>" + result[i].title + "</td>" +
+                " <td>" + result[i].suggest_prof + "</td> <td> 通过</td><td><button type=\"button\" class=\"btn \" data-toggle=\"modal\" data-target=\"#myModal\" onclick='StartRModal(\"" + result[i].id + "\",\"" + result[i].title + "\",\"" + result[i].student + "\")'>" +
+                "审核 </button></td></tr>");
+            }  else {
+                $("#advise-list").append("<tr><td>" + result[i].id + "</td><td>" + result[i].student_id + "</td><td>" + result[i].student + "</td>" +
+                " <td>" + result[i].title + "</td>" +
+                " <td>" + result[i].suggest_prof + "</td> <td> 未通过</td><td><button type=\"button\" class=\"btn \" data-toggle=\"modal\" data-target=\"#myModal\" onclick='StartRModal(\"" + result[i].id + "\",\"" + result[i].title + "\",\"" + result[i].student + "\")'>" +
+                "审核 </button></td></tr>");
+            }
+
+        }
+    });
+}
