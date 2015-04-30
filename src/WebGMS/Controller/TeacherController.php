@@ -76,6 +76,36 @@ class TeacherController implements ControllerProviderInterface
                 ['config' => $config, 'user' => $user]);
         });
 
+        $route->get("/teacher/suggestion/practice",function() use($app,$config){
+            $user = $app['session']->get('user');
+            $query = <<<Q
+                select * from   shenfei_practice_process where teacher_id = ?
+Q;
+            $result = $app['db']->fetchAll($query,[$user['id']]);
+            if ($result[0]['suggestion'] ==null||$result[0]['suggestion'] =="null"){
+                return $app['twig']->render(
+                    '/teacher/submit-suggestion.html',
+                    ['config' => $config, 'user' => $user,'info'=>$result[0]]);
+            } else {
+                return $app['twig']->render('/teacher/already-suggestion.html',
+                    ['config' => $config, 'user' => $user]);
+            }
+        });
+        $route->post("/teacher/suggest-deal",function(Request $request) use($app,$config){
+            $id = $request->get("sid");
+            $suggest = $request->get('suggest');
+            $sql = <<<QUERY
+                update shenfei_practice_process set `suggestion` = ? where id = ?
+QUERY;
+            $flag = $app['db']->executeUpdate($sql, array($suggest, $id));
+            if ($flag)
+                return $app->redirect("/teacher/suggestion/practice");
+            else {
+                return new Response("提交失败，请联系管理员");
+            }
+
+        });
+
         $route->get("/restful/teacher/ensure/practice",function() use($app,$config){
             $user = $app['session']->get('user');
 
