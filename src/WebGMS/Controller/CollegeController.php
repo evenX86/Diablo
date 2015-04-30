@@ -57,8 +57,87 @@ class CollegeController implements ControllerProviderInterface
                 ['config' => $config, 'user' => $user]);
 
         });
+        /**
+         * 审核论文
+         */
+        $route->get("/college/ensure/paper", function () use ($app, $config) {
+            $user = $app['session']->get('user');
+            return $app['twig']->render(
+                '/college/ensure-paper.html',
+                ['config' => $config, 'user' => $user]);
 
+        });
 
+        $route->get("/restful/college/paper/list",function() use($app,$config){
+            $user = $app['session']->get('user');
+            $query = <<<Q
+                select * from shenfei_user where user_id = ?
+Q;
+            $userInfo = $app['db']->fetchAll($query,[$user['id']]);
+            $major = $userInfo[0]['college'];
+            $sql = <<<QU
+                SELECT
+                    shenfei_subject.subject_title,shenfei_subject.major,shenfei_paper.ensure_teacher,shenfei_paper.ensure_prof,shenfei_paper.level_college,shenfei_paper.student_id,shenfei_paper.id,shenfei_paper.paper_addr
+                FROM
+                    shenfei_subject
+
+                right JOIN shenfei_paper ON shenfei_subject.student_id = shenfei_paper.student_id
+
+                WHERE
+                    shenfei_subject.start_report = "true"
+                AND shenfei_subject.college = ?
+QU;
+            $result = $app['db']->fetchAll($sql,[$major]);
+
+            $info = <<<INFO
+                select * from shenfei_user
+INFO;
+            $m = $app['db']->fetchAll($info);
+
+            $name = [];
+
+            foreach ($m as $row) {
+                $name[$row['user_id']] = $row['user_name'];
+            }
+
+            $final = [];
+            foreach($result as $row){
+                $flag = 0;
+                $addr = $row['paper_addr'];
+                $arr = explode("\\",$addr);
+                $addr = "http://localhost:/resources/upload/startr/".$arr[count($arr)-1];
+                if ($row['ensure_teacher'] =="true"&&$row['ensure_prof'] =="true") {$flag = 1;}
+                else if($row['ensure_teacher'] =="true") {
+                    $flag = 2;
+                }
+                if ($flag != 1) continue;
+                array_push($final,[
+                    'id'=>$row['id'],
+                    'addr'=>$addr,
+                    'title'=>$row['subject_title'],
+                    'student'=>$name[$row['student_id']],
+                    'major'=>$row['major'],
+                    'level'=>$row['level_college'],
+                    'flag'=>$flag
+                ]);
+            }
+
+            return $app->json($final);
+        });
+
+        $route->post("/college/ensure/paper",function(Request $request) use($app,$config){
+            $id = $request->get("id");
+            $agree = $request->get("agree");
+            $sql = <<<QUERY
+                update shenfei_paper set `level_college` = ? where id = ?
+QUERY;
+            $flag = $app['db']->executeUpdate($sql, array($agree, $id));
+            if ($flag)
+                return $app->redirect("/college/ensure/paper");
+            else {
+                return new Response("审核失败，请联系管理员");
+            }
+        });
         $route->get("/restful/college/startr/list",function() use($app,$config){
             $user = $app['session']->get('user');
             $query = <<<Q
