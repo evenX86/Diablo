@@ -85,3 +85,25 @@ function StartRModal(id,report,name){
     $("#startr-title-modal").val(report);
     $("#startr-student-modal").val(name);
 }
+
+function showPaperList() {
+    $.get("/restful/prof/paper/list",function(result){
+        for (var i = 0; i < result.length; i++) {
+            var flag = 0;
+            if (result[i].flag == 2) {
+                $("#paper-list").append("<tr><td>" + result[i].id + "</td> <td>" + result[i].title + "</td>" +
+                " <td>" + result[i].student + "</td> <td><a href='"+result[i].addr+"'>下载</a></td> <td> 指导教师已审核</td><td><button type=\"button\" class=\"btn \" data-toggle=\"modal\" data-target=\"#myModal\" onclick='StartRModal(\"" + result[i].id + "\",\"" + result[i].title + "\",\"" + result[i].student + "\")'>" +
+                "审查 </button></td></tr>");
+            } else if (result[i].flag == 1){
+                $("#paper-list").append("<tr><td>" + result[i].id + "</td> <td>" + result[i].title + "</td>" +
+                " <td>" + result[i].student + "</td><td><a href='"+result[i].addr+"'>下载</a></td><td> 已完成</td><td><button type=\"button\" class=\"btn disabled\" data-toggle=\"modal\" data-target=\"#myModal\" onclick='StartRModal(\"" + result[i].id + "\",\"" + result[i].title + "\",\"" + result[i].student + "\")'>" +
+                "审查 </button></td></tr>");
+            } else {
+                $("#paper-list").append("<tr><td>" + result[i].id + "</td> <td>" + result[i].title + "</td>" +
+                " <td>" + result[i].student + "</td><td><a href='"+result[i].addr+"'>下载</a></td><td> 指导教师未审核</td><td><button type=\"button\" class=\"btn disabled\" data-toggle=\"modal\" data-target=\"#myModal\" onclick='StartRModal(\"" + result[i].id + "\",\"" + result[i].title + "\",\"" + result[i].student + "\")'>" +
+                "审查 </button></td></tr>");
+            }
+
+        }
+    });
+}
