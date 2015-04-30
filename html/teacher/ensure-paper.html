@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>{{ config.title}}</title>
+    <base href="{{config.baseurl}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{config.title}},浙江树人大学, 毕业设计管理系统, SF">
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+    {{include('basecss.html')}}
+    <link href="assets/css/dashboard.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/signin.css">
+    {{include('basescript.html')}}
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">树大毕设过程管理系统</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class=""><a href="/" target="_blank">系统首页</a></li>
+                <li class=""><a href="/register" target="_blank">用户注册</a></li>
+                <li class=""><a href="/help" target="_blank">帮助信息</a></li>
+                <li class=""><a href="/contact" target="_blank">联系反馈</a></li>
+                {% if user %}
+                <li>
+                    <a style="float: left;cursor: pointer">欢迎{{user.username}},你的角色是{{user.type}}</a></li>
+                </li>
+                <li class="" style="float: right;">
+                    <a href="/logout" target="_blank" style="float: left">注销</a></li>
+                {% endif %}
+            </ul>
+            <form class="navbar-form navbar-right">
+                <input type="text" class="form-control" placeholder="Search...">
+            </form>
+        </div>
+    </div>
+</nav>
+<!-- 指导教师-->
+<div class="container-fluid">
+
+    {{include('teacher/category.html')}}
+
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <h2 class="sub-header">待审核论文与材料</h2>
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>课题编号</th>
+                    <th>课题名称</th>
+                    <th>课题所选学生</th>
+                    <th>论文与材料</th>
+                    <th>进度</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody id="paper-list">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">审核</h4>
+            </div>
+            <div class="modal-body" id="subject-audit-modal">
+                <form action="/teacher/ensure/paper" method="post">
+                    <div class="form-group" hidden>
+                        <label>课题标题</label>
+                        <input name="id" type="text" class="form-control" id="paper-id-modal" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>课题标题</label>
+                        <input name="subject-title" type="text" class="form-control" id="paper-title-modal" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>申报学生</label>
+                        <input name="subject-teacherid" type="text" class="form-control" id="paper-student-modal" value="钟锋" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>意见</label>
+                        <input name="suggest" type="text" class="form-control" id="paper-suggest-modal">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInput2">是否同意</label>
+                        <select class="form-control" name="agree" id="exampleInput2">
+                            <option value="true">同意</option>
+                            <option value="false">不同意</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="submit" class="btn btn-primary">确定</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+<script src="assets/js/holder.js"></script>
+<script src="teacher/teacher.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+<script>
+    $(document).ready(function(){
+        showPaperList();
+        initEnv(7);
+    });
+</script>
+{{include('footer.html')}}
