@@ -256,6 +256,87 @@ QUERY;
                 ['config' => $config, 'user' => $user]);
 
         });
+
+        /**
+         * 指导教师确认论文和过程管理材料
+         */
+        $route->get("/teacher/ensure/paper", function () use ($app, $config) {
+            $user = $app['session']->get('user');
+            return $app['twig']->render(
+                '/teacher/ensure-paper.html',
+                ['config' => $config, 'user' => $user]);
+
+        });
+        /**
+         *
+         */
+        $route->get("/restful/teacher/ensure/paper",function() use($app,$config){
+            $user = $app['session']->get('user');
+
+            $query = <<<QU
+                select * from shenfei_paper where teacher_id = ?
+QU;
+            $result = $app['db']->fetchAll($query,[$user['id']]);
+
+            $info = <<<INFO
+                select * from shenfei_user
+INFO;
+            $m = $app['db']->fetchAll($info);
+
+            $name = [];
+
+            foreach ($m as $row) {
+                $name[$row['user_id']] = $row['user_name'];
+            }
+            $final = [];
+            foreach($result as $row){
+                $addr = $row['paper_addr'];
+                $arr = explode("\\",$addr);
+                $addr = "http://localhost:/resources/upload/startr/".$arr[count($arr)-1];
+                array_push($final,[
+                    'id'=>$row['id'],
+                    'student'=>$name[$row['student_id']],
+                    'addr'=>$addr,
+                    'report'=>$row['paper_name'],
+                    'ensure'=>$row['ensure_teacher'],
+                    'suggest'=>$row['suggestion']
+                ]);
+            }
+
+            return $app->json($final);
+
+        });
+
+        /**
+         * 处理paper审查
+         * /teacher/ensure/paper
+         */
+        $route->post("/teacher/ensure/paper", function (Request $request) use ($app, $config) {
+            $id = $request->get("id");
+            $agree = $request->get("agree");
+            $suggest = $request->get("suggest");
+
+            if ($agree == "false") {
+                return $app->redirect("/teacher/ensure/paper");
+            }
+            $sql = <<<QUERY
+                update shenfei_paper set `ensure_teacher` = ?  where id = ?
+QUERY;
+
+            $flag = $app['db']->executeUpdate($sql, array("true", $id));
+            $sql = <<<QUERY
+                update shenfei_paper set `suggestion` = ?  where id = ?
+QUERY;
+
+            $flag = $app['db']->executeUpdate($sql, array($suggest, $id));
+
+            if ($flag) {
+                return $app->redirect("/teacher/ensure/paper");
+            } else {
+                return new Response("操作失败", 200);
+            }
+        });
+
         /**
          * 指导教师填写实习任务书
          */
