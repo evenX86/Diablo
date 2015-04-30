@@ -33,3 +33,12 @@ function showStartReportInfo() {
 
     });
 }
+
+function showPaperInfo() {
+    $.get("/restful/student/paper/info",function(result){
+        $("#subject-title-modal").val(result[0]['subject_title']);
+        $("#subject-id-modal").val(result[0]['id']);
+        $("#subject-teacherid-modal").val(result[0]['student_id']);
+
+    });
+}

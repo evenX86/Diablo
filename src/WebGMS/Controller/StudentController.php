@@ -148,6 +148,72 @@ Q;
         });
 
         /**
+         * 学生提交毕业论文和材料
+         */
+
+        $route->get("/student/paper", function () use ($app, $config) {
+            $user = $app['session']->get('user');
+            $query = <<<Q
+                select * from   shenfei_subject where student_id = ?
+Q;
+            $result = $app['db']->fetchAll($query,[$user['id']]);
+            if ($result[0]['paper'] =="true"||$result[0]['paper'] ==true) {
+                return $app['twig']->render(
+                    '/student/paper-already.html',
+                    ['config' => $config, 'user' => $user]);
+            }
+
+            return $app['twig']->render(
+                '/student/paper.html',
+                ['config' => $config, 'user' => $user]);
+
+        });
+
+        /**
+         * 处理论文资料压缩文件的提交
+         */
+        $route->post("/student/paper/deal/",function(Request $request) use($app,$config){
+            $file = $request->files->get("uploadfile");
+            $id = $request->get("subject-id");
+            $uploaddir = "D:\\bishe\\Diablo\\resources\\upload\\startr";
+            if ($file ==null) {
+                return new Response("上传失败",500);
+            }
+            $file->move($uploaddir,$file->getClientOriginalName());
+            $sql = <<<QUERY
+                update shenfei_subject set `paper` = "true" where id = ?
+QUERY;
+            $flag = $app['db']->executeUpdate($sql,[$id]);
+
+            $query = <<<QUERY
+                select * from  shenfei_subject where id = ?
+QUERY;
+            $result = $app['db']->fetchAll($query,[$id]);
+
+            $flag = $app['db']->insert("shenfei_paper", [
+                'student_id' => $result[0]['student_id'],
+                'teacher_id' => $result[0]['teacher_id'],
+                'paper_name' => $result[0]['subject_title'],
+                'paper_addr' => $uploaddir."\\".$file->getClientOriginalName(),
+                'insert_date' =>  date('Y-m-d', time()),
+            ]);
+
+            return $app->redirect("/student/paper");
+        });
+        /**
+         * 学生了论文信息
+         *
+         */
+        $route->get("/restful/student/paper/info", function () use ($app, $config) {
+            $user = $app['session']->get('user');
+            $query = <<<Q
+                select * from shenfei_subject where student_id = ? and `practice_process` = "true"
+Q;
+            $result = $app['db']->fetchAll($query,[$user['id']]);
+            return $app->json($result);
+
+        });
+        /**
          * 学生实习总结
          */
         $route->get("/restful/student/summary/info", function () use ($app, $config) {
