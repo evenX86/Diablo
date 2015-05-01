@@ -51,13 +51,15 @@ function showStudentList() {
                 flag = "未填写";
 
                 $("#student-list").append("<tr><td>" + result[i].id + "</td> <td>" + result[i].name + "</td>" +
-                " <td>" + result[i].major + "</td> <td>" + result[i].title + "</td> <td> " + flag + "</td><td><button type=\"button\" class=\"btn \" data-toggle=\"modal\" data-target=\"#myModal\" onclick='TaskModal(\"" + result[i].id + "\",\"" + result[i].name + "\",\"" + result[i].major + "\")'>" +
+                " <td>" + result[i].major + "</td> <td>" + result[i].title + "</td> <td> " + flag + "</td><td><button type=\"button\" class=\"btn \" data-toggle=\"modal\" " +
+                "data-target=\"#myModal\" onclick='TaskModal(\"" + result[i].id + "\",\"" + result[i].name + "\",\"" + result[i].major + "\",\"" + result[i].college + "\")'>" +
                 "填写 </button></td></tr>");
             } else {
                 flag = "已完成"
 
                 $("#student-list").append("<tr><td>" + result[i].id + "</td> <td>" + result[i].name + "</td>" +
-                " <td>" + result[i].major + "</td> <td>" + result[i].title + "</td> <td> " + flag + "</td><td><button type=\"button\" class=\"btn \" data-toggle=\"modal\" data-target=\"#myModal\" onclick='TaskModal2(\"" + result[i].id + "\",\"" + result[i].name + "\",\"" + result[i].major + "\")'>" +
+                " <td>" + result[i].major + "</td> <td>" + result[i].title + "</td> <td> " + flag + "</td><td><button type=\"button\" class=\"btn \" " +
+                "data-toggle=\"modal\" data-target=\"#myModal\" onclick='TaskModal2(\"" + result[i].id + "\",\"" + result[i].name + "\",\"" + result[i].major + "\",\"" + result[i].college + "\")'>" +
                 "查看 </button></td></tr>");
             }
 
@@ -65,17 +67,20 @@ function showStudentList() {
     });
 }
 
-function TaskModal(id, name, major) {
+function TaskModal(id, name, major,college) {
     $("#studentNameInput").val(name);
     $("#studentIDInput").val(id);
     $("#exampleInput2").val(major);
+    $("#collegeInput2").val(college);
 }
 
 
-function TaskModal2(id, name, major) {
+function TaskModal2(id, name, major,college) {
+    console.log(college);
     $("#studentNameInput").val(name);
     $("#studentIDInput").val(id);
     $("#exampleInput2").val(major);
+    $("#collegeInput2").val(college);
     $.get("/restful/show/taskdetail/" + id + "/", function (result) {
         $("#taskInput").val(result[0].student_task_name);
         $("#exampleInputPassword1").val(result[0].student_task_content);

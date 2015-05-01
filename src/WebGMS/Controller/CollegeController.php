@@ -143,7 +143,7 @@ QUERY;
             $flag = $app['db']->executeUpdate($sql, array($suggest, $id));
 
             if ($flag)
-                return $app->redirect("/college/ensure/advise");
+                return $app->redirect("/college/ensure/excellent");
             else {
                 return new Response("审核失败，请联系管理员");
             }
@@ -305,7 +305,7 @@ Q;
                 update shenfei_student_task set `college_ensure` = "true" where student_id = ?
 QUERY;
 
-            $result = $app['db']->fetchAll($sql, [$id]);
+            $result = $app['db']->executeUpdate($sql, [$id]);
             if ($result) {
                 return $app->redirect("/dashboard");
             } else {

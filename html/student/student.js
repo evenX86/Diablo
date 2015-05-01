@@ -34,10 +34,30 @@ function showStartReportInfo() {
     });
 }
 
+function showStartReportInfo2() {
+    $.get("/restful/student/startr/info",function(result){
+        $("#subject-title-modal").val(result[0]['subject_title']);
+        $("#subject-id-modal").val(result[0]['id']);
+        $("#subject-teacher-modal").val(result[0]['teacher_name']);
+        $("#subject-teacherid-modal").val(result[0]['student_id']);
+
+    });
+}
+
 function showPaperInfo() {
     $.get("/restful/student/paper/info",function(result){
         $("#subject-title-modal").val(result[0]['subject_title']);
         $("#subject-id-modal").val(result[0]['id']);
+        $("#subject-teacherid-modal").val(result[0]['student_id']);
+
+    });
+}
+
+function showStartReportInfo1() {
+    $.get("/restful/student/startr/info",function(result){
+        $("#subject-title-modal").val(result[0]['subject_title']);
+        $("#subject-id-modal").val(result[0]['id']);
+        $("#subject-teacher-modal").val(result[0]['teacher_name']);
         $("#subject-teacherid-modal").val(result[0]['student_id']);
 
     });

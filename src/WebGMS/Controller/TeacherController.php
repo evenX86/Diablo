@@ -218,12 +218,18 @@ QUERY;
             $major = $request->get("major");
             $teacher = $user['username'];
             $teacherid = $user['id'];
+            $query = <<<QU
+                select * from shenfei_user where user_id = ?
+QU;
+            $userinfo = $app['db']->fetchAll($query,[$teacherid]);
+
             $flag = $app['db']->insert("shenfei_subject", [
                 'subject_title' => $subject_title,
                 'subject_descripe' => $subject_content,
                 'teacher_id' => $teacherid,
                 'teacher_name' => $teacher,
                 'major' => $major,
+                'college'=>$userinfo[0]['college'],
                 'create_time' => date('Y-m-d', time()),
                 'update_time' => date('Y-m-d', time())
             ]);
@@ -443,7 +449,7 @@ QUERY;
 
             $final = [];
             foreach ($result as $row) {
-                array_push($final, ['id' => $row['student_id'], 'name' => $name[$row['student_id']], 'major' => $row['major'], 'title' => $row['subject_title'], 'task' => $row['task']]);
+                array_push($final, ['id' => $row['student_id'], 'name' => $name[$row['student_id']], 'major' => $row['major'], 'title' => $row['subject_title'], 'task' => $row['task'],'college'=>$row['college']]);
             }
             return $app->json($final);
         });

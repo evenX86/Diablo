@@ -72,7 +72,7 @@ class ProfController implements ControllerProviderInterface
         $route->get("/restful/prof/student/list", function () use ($app, $config) {
             $user = $app['session']->get('user');
             $query = <<<Q
-                select * from shenfei_user where id = ?
+                select * from shenfei_user where user_id = ?
 Q;
             $userInfo = $app['db']->fetchAll($query,[$user['id']]);
             $major = $userInfo[0]['major'];
@@ -180,7 +180,7 @@ QUERY;
         $route->get("/restful/prof/paper/list", function () use ($app, $config) {
             $user = $app['session']->get('user');
             $query = <<<Q
-                select * from shenfei_user where id = ?
+                select * from shenfei_user where user_id = ?
 Q;
             $userInfo = $app['db']->fetchAll($query,[$user['id']]);
             $major = $userInfo[0]['major'];
@@ -336,7 +336,7 @@ QUERY;
         $route->get("/restful/prof/startr/list",function() use($app,$config){
             $user = $app['session']->get('user');
             $query = <<<Q
-                select * from shenfei_user where id = ?
+                select * from shenfei_user where user_id = ?
 Q;
             $userInfo = $app['db']->fetchAll($query,[$user['id']]);
             $major = $userInfo[0]['major'];
