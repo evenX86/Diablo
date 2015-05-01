@@ -267,10 +267,17 @@ QUERY;
 
 
         $route->get("/restful/audit-list", function () use ($app, $config) {
+            $user = $app['session']->get('user');
+
+            $sql = <<<Q
+                select * from shenfei_user where user_id = ?
+Q;
+            $userinfo = $app['db']->fetchAll($sql,[$user['id']]);
+
             $query = <<<QUERY
-                SELECT * FROM `shenfei_subject` WHERE ISNULL(prof_audit) OR prof_audit = "false"
+                SELECT * FROM `shenfei_subject` WHERE (ISNULL(prof_audit) OR prof_audit = "false") and `major` = ?
 QUERY;
-            $result = $app['db']->fetchAll($query);
+            $result = $app['db']->fetchAll($query,[$userinfo[0]['major']]);
             return $app->json($result);
         });
 
