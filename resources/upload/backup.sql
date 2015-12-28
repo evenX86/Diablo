@@ -180,7 +180,7 @@ CREATE TABLE `shenfei_student_task` (
 -- Records of shenfei_student_task
 -- ----------------------------
 INSERT INTO `shenfei_student_task` VALUES ('1', 'student', '2', '计算机科学与技术', '121213232', '32432432423', 'true', '计算机学院');
-INSERT INTO `shenfei_student_task` VALUES ('2', 'xuyifei', '2010', '计算机科学与技术', '23123123123', '4324234234234', 'true', '计算机学院');
+INSERT INTO `shenfei_student_task` VALUES ('2', 'sdsds', '2010', '计算机科学与技术', '23123123123', '4324234234234', 'true', '计算机学院');
 INSERT INTO `shenfei_student_task` VALUES ('3', 'shenxinyan', '03', '计算机科学与技术', '1111', '222222222', 'true', '计算机学院');
 INSERT INTO `shenfei_student_task` VALUES ('4', 'student', '2', '计算机科学与技术', '2121312', '1231231231', 'false', '计算机学院');
 INSERT INTO `shenfei_student_task` VALUES ('5', '沈鑫焱', '11', '计算机科学与技术', '12234', '124543345', 'true', '计算机学院');
@@ -292,8 +292,8 @@ INSERT INTO `shenfei_user` VALUES ('3', 'teacher', '3', 'e10adc3949ba59abbe56e05
 INSERT INTO `shenfei_user` VALUES ('4', 'xuyifei', '4', 'e10adc3949ba59abbe56e057f20f883e', null, null, '男', '', '', '', '计算机科学与技术', 'student', '');
 INSERT INTO `shenfei_user` VALUES ('5', 'wang', '5', 'd41d8cd98f00b204e9800998ecf8427e', null, null, '男', '', '', '', '计算机科学与技术', 'teacher', '');
 INSERT INTO `shenfei_user` VALUES ('6', 'pro', '6', 'e10adc3949ba59abbe56e057f20f883e', null, null, '男', '', '', '计算机学院', '计算机科学与技术', 'prof', '');
-INSERT INTO `shenfei_user` VALUES ('7', '钟锋', '7', 'e10adc3949ba59abbe56e057f20f883e', null, null, '男', '', '', '', '计算机科学与技术', 'teacher', '');
-INSERT INTO `shenfei_user` VALUES ('8', '徐依飞', '20105641030', 'e10adc3949ba59abbe56e057f20f883e', null, null, '男', '', '', '', '计算机科学与技术', 'student', '');
+INSERT INTO `shenfei_user` VALUES ('7', 'sdsdsdsd', '7', 'e10adc3949ba59abbe56e057f20f883e', null, null, '男', '', '', '', '计算机科学与技术', 'teacher', '');
+INSERT INTO `shenfei_user` VALUES ('8', 'sdsdsd', '20105641030', 'e10adc3949ba59abbe56e057f20f883e', null, null, '男', '', '', '', '计算机科学与技术', 'student', '');
 INSERT INTO `shenfei_user` VALUES ('9', '沈菲', '123', 'd41d8cd98f00b204e9800998ecf8427e', null, null, '男', '', '', '', '计算机科学与技术', 'student', '');
 INSERT INTO `shenfei_user` VALUES ('10', 'college', 'college', 'e10adc3949ba59abbe56e057f20f883e', null, null, '男', '', '', '计算机学院', '计算机科学与技术', 'college', '');
 INSERT INTO `shenfei_user` VALUES ('11', '陶加恩', 'tje', 'd41d8cd98f00b204e9800998ecf8427e', null, null, '男', '', '', '', '计算机科学与技术', 'student', '');
