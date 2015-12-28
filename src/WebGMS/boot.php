@@ -1,11 +1,5 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: yuhuitao
- * Date: 13-2-19
- * Time: 上午9:32
- * To change this template use File | Settings | File Templates.
- */
+
 use Silex\Provider\DoctrineServiceProvider;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use WebGMS\Config;
